@@ -1,7 +1,7 @@
 <template>
   <div class="home" >
     <router-link to="/login">登录页</router-link>
-    <router-link to="/login">注册页</router-link>
+    <router-link to="/Register">注册页</router-link>
   </div>
 </template>
 
