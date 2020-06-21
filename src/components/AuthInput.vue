@@ -7,7 +7,9 @@
           }"
       type="type" 
       :placeholder="textPlaceholder"
-      v-model="inputVal" />
+      v-model="inputVal"
+       @blur="showTips"
+       />
   </div>
 </template>
 
@@ -24,9 +26,16 @@ export default {
     inputVal(newVal){
       const regExp = new RegExp(this.rule)
       const errMsg=this.errMsg
-      this.isValid=regExp.test(newVal)
-      if(!isValid){
+      this.isValid = regExp.test(newVal)
+      if(!this.isValid){
         console.log(errMsg);
+      }
+    }
+  },
+  methods:{
+    showTips(){
+      if(!this.isValid){
+        console.log('输入框失去焦点, 数据依然不合法');       
       }
     }
   }
@@ -44,8 +53,9 @@ export default {
     border-bottom: 1px solid #333;
     width: 100%;
   }
+  .error{
+ border-bottom-color: red;
+ }
 }
-.error{
-  border-bottom-color: red;
-}
+
 </style>
