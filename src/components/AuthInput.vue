@@ -1,6 +1,13 @@
 <template>
   <div class="inputWrapper">
-    <input type="type" :placeholder="textPlaceholder" v-model="inputVal" />
+    <input 
+      :class="{
+          success: isValid,
+          error: !isValid
+          }"
+      type="type" 
+      :placeholder="textPlaceholder"
+      v-model="inputVal" />
   </div>
 </template>
 
@@ -9,14 +16,15 @@ export default {
   props: ["textPlaceholder", "type", "rule", "errMsg"],
   data() {
     return {
-      inputVal: ""
+      inputVal: "",
+      isValid:true,
     };
   },
   watch:{
     inputVal(newVal){
       const regExp = new RegExp(this.rule)
       const errMsg=this.errMsg
-      const isValid=regExp.test(newVal)
+      this.isValid=regExp.test(newVal)
       if(!isValid){
         console.log(errMsg);
       }
@@ -36,5 +44,8 @@ export default {
     border-bottom: 1px solid #333;
     width: 100%;
   }
+}
+.error{
+  border-bottom-color: red;
 }
 </style>
