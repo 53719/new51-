@@ -6,12 +6,10 @@
     <div class="logoWapper">
       <span class="iconfont iconnew"></span>
     </div>
-    <div class="inputWapper">
-      <input type="text" />
-    </div>
-    <div class="inputWapper">
-      <input type="text" />
-    </div>
+
+    <AuthInput />
+    <AuthInput />
+
     <div class="butWapper">
       <button>登录</button>
     </div>
@@ -19,13 +17,19 @@
 </template>
 
 <script>
-export default {};
+import AuthInput from "@/components/AuthInput";
+
+export default {
+  components: {
+    AuthInput
+  }
+};
 </script>
 
 <style lang="less" scoped>
 .closeWrapper {
   padding: 6.667vw 6.667vw 0;
-  iconicon-test {
+  .iconicon-test {
     font-size: 7.5vw;
   }
 }
@@ -34,17 +38,7 @@ export default {};
   color: red;
   margin-left: 25vw;
 }
-.inputWapper {
-  padding: 0 6.667vw;
-  input {
-    font-size: 5vw;
-    line-height: 16.667vw;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #333;
-    width: 100%;
-  }
-}
+
 .butWapper {
   text-align: center;
   margin-top: 16.667vw;
