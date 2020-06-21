@@ -24,12 +24,16 @@ export default {
   },
   watch:{
     inputVal(newVal){
+      // 1. 利用接收回来的字符串创建一个正则对象
       const regExp = new RegExp(this.rule)
+      
       const errMsg=this.errMsg
       this.isValid = regExp.test(newVal)
       if(!this.isValid){
         console.log(errMsg);
       }
+       // 2. 每当数据变化, 应该通知父组件
+      this.$emit('valChanged',newVal)
     }
   },
   methods:{
