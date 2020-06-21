@@ -26,7 +26,7 @@ export default {
     inputVal(newVal){
       // 1. 利用接收回来的字符串创建一个正则对象
       const regExp = new RegExp(this.rule)
-      
+
       const errMsg=this.errMsg
       this.isValid = regExp.test(newVal)
       if(!this.isValid){
@@ -39,7 +39,8 @@ export default {
   methods:{
     showTips(){
       if(!this.isValid){
-        console.log('输入框失去焦点, 数据依然不合法');       
+        console.log('输入框失去焦点, 数据依然不合法'); 
+        this.$toast.fail(this.errMsg)      
       }
     }
   }
