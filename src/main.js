@@ -10,6 +10,12 @@ import 'vant/lib/index.css';
 // 3. 注册组件
 Vue.use(Vant);
 
+// 引入请求库 axios
+// 1. 引入库
+import axios from 'axios'
+// 2. 注册到 Vue 原型上
+Vue.prototype.$axios = axios
+
 
 Vue.config.productionTip = false
 
