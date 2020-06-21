@@ -7,8 +7,18 @@
       <span class="iconfont iconnew"></span>
     </div>
 
-    <AuthInput />
-    <AuthInput />
+    <AuthInput 
+        textPlaceholder="用户名/手机号码"
+        type='text'
+        rule='^\d{5,11}$'
+        errMsg='请输入正确的手机号码'
+         />
+    <AuthInput
+          textPlaceholder="密码"
+          type="password"
+          rule="^.{3,9}$"
+          errMsg="请输入三到九位的密码"
+          />
 
     <div class="butWapper">
       <button>登录</button>
@@ -34,9 +44,9 @@ export default {
   }
 }
 .iconnew {
-  font-size: 50vw;
+  font-size: 40vw;
   color: red;
-  margin-left: 25vw;
+  margin-left: 30vw;
 }
 
 .butWapper {
