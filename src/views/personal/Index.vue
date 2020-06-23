@@ -1,29 +1,72 @@
 <template>
   <div>
-    <div class="profile">
-      <img src="@/assets/logo1.png" alt class="avatar" />
+    <div class="profile" v-if="userInfo">
+        <img v-if="userInfo.head_img" :src="'http://127.0.0.1:3000' + userInfo.head_img" alt="" class="avatar">
+        <img v-else src="@/assets/logo1.png" alt="" class="avatar">
       <div class="info">
         <div class="name">
-          <span class="iconfont iconxingbienv"></span>
-          舔狗
+          <span class="iconfont iconxingbienan" v-if="userInfo.gender ==1"></span>
+          <span class="iconfont iconxingbienv" v-else></span>
+          {{userInfo.nickname}}
         </div>
-        <div class="data">2020-6-23</div>
+        <div class="data">{{userInfo.create_date.split('T')[0]}}</div>
       </div>
       <a href="#" class="iconfont iconjiantou1"></a>
     </div>
 
     <div>
-         <NavBar/>
+      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />
+      <NavBar LabelText="我的关注" descText="关注的用户" @barClick="handleBar('关注')" />
     </div>
+    <AuthBtn btnText="注销/退出" @clicked="logout()"/>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/Nabbar'
+import NavBar from "@/components/Nabbar";
+import AuthBtn from "@/components/AuthBtn";
 export default {
-    components:{
-        NavBar
-    }
+  data() {
+    return {
+      userInfo: null
+    };
+  },
+  components: {
+    NavBar,
+    AuthBtn
+  },
+  mounted() {
+    this.$axios({
+      url: "http://127.0.0.1:3000/user/" + localStorage.getItem("userId"),
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    }).then(res => {
+      console.log(res.data);
+      const { message, data } = res.data;
+      if (message == "获取成功") {
+        this.userInfo = data;
+        console.log(this.userInfo);
+      } else {
+        this.$toast.fail(message);
+      }
+    });
+  },
+
+  methods: {
+    handleBar(pagename) {
+      console.log(pagename);
+    },
+     logout(){
+      //清理数据
+      localStorage.removeItem('userId')
+      localStorage.removeItem('token')
+      //跳转
+      this.$router.replace('/')
+  }
+  },
+ 
 };
 </script>
 
@@ -43,13 +86,16 @@ export default {
     padding-left: 2.778vw;
     font-size: 3.889vw;
     .name {
-        .iconxingbienv{
-            color: hotpink;
-        }
+      .iconxingbienv {
+        color: hotpink;
+      }
+      .iconxingbienan {
+        color: #6fb0df;
+      }
     }
-    .data{
-        padding-top: 1.389vw;
-        color: gray;
+    .data {
+      padding-top: 1.389vw;
+      color: gray;
     }
   }
 }

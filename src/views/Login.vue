@@ -78,7 +78,11 @@ export default {
               console.log(message);
               console.log(data);
               if(message=='登录成功'){
+                // 这里登录成功,除了弹窗,现在还需要记录 token和用户的id
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('userId', data.user.id)
                 this.$toast.success(message)
+                this.$router.replace({path:'/personal'})
               }else{
                 this.$toast.fail(message)
               }
