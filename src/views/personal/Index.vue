@@ -11,11 +11,20 @@
       </div>
       <a href="#" class="iconfont iconjiantou1"></a>
     </div>
+
+    <div>
+         <NavBar/>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import NavBar from '@/components/Nabbar'
+export default {
+    components:{
+        NavBar
+    }
+};
 </script>
 
 <style lang="less" scoped>
