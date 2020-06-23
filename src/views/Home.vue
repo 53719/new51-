@@ -2,6 +2,7 @@
   <div class="home">
     <router-link to="/login">登录页</router-link>
     <router-link to="/Register">注册页</router-link>
+    <router-link to="/personal">个人中心</router-link>
     <div v-for="(item,index) in list" :key="index">{{item.title}}</div>
   </div>
 </template>
@@ -18,7 +19,7 @@ export default {
       url: "http://liangwei.tech:3000/post",
       method: "get",
       params: {
-        category: 8
+        category: 7
       }
     }).then(res => {
       // 以前 jq 的 success 写在这里就 ok 了

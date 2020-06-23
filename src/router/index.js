@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import PersonIndex from '@/views/personal/Index'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/Register',
     name:'RegisterPage',
     component: Register
+  },
+  {
+    path: '/personal',
+    name:'PersonindexPage',
+    component: PersonIndex
   }
 
 ]
