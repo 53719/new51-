@@ -12,9 +12,9 @@ Vue.use(Vant);
 
 // 引入请求库 axios
 // 1. 引入库
-import axios from 'axios'
+import axios from 'axios';
 // 2. 注册到 Vue 原型上
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
 
 
 Vue.config.productionTip = false
