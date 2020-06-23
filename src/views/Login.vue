@@ -48,6 +48,25 @@ export default {
             // 这里直接通过 this.username / this.password 拿到用户输入数据
             console.log('用户名', this.username);
             console.log('密码', this.password); 
+
+            // 真正发送登录请求
+            this.$axios({
+              url:'http://127.0.0.1:3000/login',
+              method:'post',
+              data:{
+                username:this.username,
+                password:this.password
+              }
+            }).then(res=>{
+              const {message,data} =res.data
+              console.log(message);
+              console.log(data);
+              if(message=='登录成功'){
+                this.$toast.success(message)
+              }else{
+                this.$toast.fail(message)
+              }
+            })
         },
         setUsername(username) {
             this.username = username
