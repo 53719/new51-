@@ -5,7 +5,7 @@
           success: isValid,
           error: !isValid
           }"
-      type="type" 
+      :type="type" 
       :placeholder="textPlaceholder"
       v-model="inputVal"
        @blur="showTips"
