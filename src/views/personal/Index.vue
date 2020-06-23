@@ -11,12 +11,14 @@
         </div>
         <div class="data">{{userInfo.create_date.split('T')[0]}}</div>
       </div>
-      <a href="#" class="iconfont iconjiantou1"></a>
+      <a href="#" class="iconfont iconjiantou1" @click="token1"></a>
     </div>
 
     <div>
-      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />
       <NavBar LabelText="我的关注" descText="关注的用户" @barClick="handleBar('关注')" />
+      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />     
+      <NavBar LabelText="我的收藏" descText="文章/视频" @barClick="handleBar('收藏')" />
+      <NavBar LabelText="设置" descText="" @barClick="handleBar('设置')" />
     </div>
     <AuthBtn btnText="注销/退出" @clicked="logout()"/>
   </div>
@@ -64,7 +66,10 @@ export default {
       localStorage.removeItem('token')
       //跳转
       this.$router.replace('/')
-  }
+    },
+    token1(){
+         this.$router.replace({path:'/edit'})
+    }
   },
  
 };
