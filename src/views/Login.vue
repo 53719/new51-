@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="closeWrapper">
-      <span class="iconfont iconicon-test"></span>
+      <a href="/" class="iconfont iconicon-test"></a> 
     </div>
     <div class="logoWapper">
       <span class="iconfont iconnew"></span>
