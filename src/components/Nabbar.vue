@@ -1,14 +1,21 @@
 <template>
-  <div class="navWrapper">
-      <div class="label">我的关注</div>
-      <div class="desc">关注的用户</div>
-      <a href="#" class="iconfont iconjiantou1"></a>
+  <div class="navWrapper" @click="handleClick">
+      <div class="label">{{LabelText}}</div>
+      <div class="desc">{{descText}}</div>
+      <a href="#" class="iconfont iconjiantou1" ></a>
   </div>
 </template>
 
 <script>
 export default {
-
+props:['LabelText','descText'],
+methods:{
+  handleClick(){
+    console.log('横条子组件被点击');
+    this.$emit('barClick')
+    
+  }
+}
 }
 </script>
 
