@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="profile" v-if="userInfo">
-        <img v-if="userInfo.head_img" :src="'http://127.0.0.1:3000' + userInfo.head_img" alt="" class="avatar">
+        <img v-if="userInfo.head_img" :src="$axios.defaults.baseURL + userInfo.head_img" alt="" class="avatar">
         <img v-else src="@/assets/logo1.png" alt="" class="avatar">
       <div class="info">
         <div class="name">
