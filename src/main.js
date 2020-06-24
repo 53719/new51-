@@ -52,11 +52,13 @@ return res
 router.beforeEach((to, from, next) => {
   //to 指的是目标来源信息
   //from 指的是来源路由信息
-  console.log('to',to);
-  console.log('from',from);
+  // console.log('to',to);
+  // console.log('from',from);
 
-  // 如果目的地是个人中心才需要校验
-  if (to.name == 'PersonindexPage') {
+  // // 如果目的地是个人中心才需要校验
+  // if (to.name == 'PersonindexPage') {
+  
+  if(to.meta.auth){
     const token = localStorage.getItem('token')
     // token存在就放行
     if (token) {

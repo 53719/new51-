@@ -30,10 +30,17 @@ const routes = [
     path: '/personal',
     name:'PersonindexPage',
     component: PersonIndex,
+    meta: {
+      auth: true
+    }
   },
   { path: '/edit',
   name:'editpage',
-  component:EditProfile}
+    component: EditProfile,
+    meta: {
+      auth: true
+    }
+  }
  
 
 ]
