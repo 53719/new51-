@@ -50,6 +50,8 @@ export default {
       if (message == "获取成功") {
         this.userInfo = data;
         console.log(this.userInfo);
+      }else if(message == '用户信息验证失败'){
+        this.$route.replace('/login')
       } else {
         this.$toast.fail(message);
       }
