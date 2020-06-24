@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     this.$axios({
-      url: "http://liangwei.tech:3000/post",
+      url: "/post",
       method: "get",
       params: {
         category: 7

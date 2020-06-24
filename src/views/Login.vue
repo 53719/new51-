@@ -67,7 +67,7 @@ export default {
 
             // 真正发送登录请求
             this.$axios({
-              url:'http://127.0.0.1:3000/login',
+              url:'/login',
               method:'post',
               data:{
                 username:this.username,

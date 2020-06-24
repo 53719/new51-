@@ -39,7 +39,7 @@ export default {
   },
   mounted() {
     this.$axios({
-      url: "http://127.0.0.1:3000/user/" + localStorage.getItem("userId"),
+      url: "/user/" + localStorage.getItem("userId"),
       method: "get",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
