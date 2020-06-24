@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="profile" v-if="userInfo" @click="$router.push('/edit')">
+    <div class="profile" v-if="userInfo">
         <img v-if="userInfo.head_img" :src="$axios.defaults.baseURL + userInfo.head_img" alt="" class="avatar">
         <img v-else src="@/assets/logo1.png" alt="" class="avatar">
       <div class="info">
@@ -65,6 +65,9 @@ export default {
       //跳转
       this.$router.replace('/login')
     },
+    token1(){
+         this.$router.replace({path:'/edit'})
+    }
   },
  
 };
