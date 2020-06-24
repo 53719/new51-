@@ -21,6 +21,8 @@ Vue.prototype.$axios = axios;
 // 设置响应式拦截器
 // axios.interceptors.response.use()  这个函数可以拦截到所有请求的响应,并且执行逻辑
 //我们需要将逻辑函数作为参数传递
+// 在入口文件，也就是组件外部，要使用 toast 需要单独引入
+import {Toast} from 'vant'
 axios.interceptors.response.use(res => {
   console.log('发送了请求');
   
@@ -28,6 +30,10 @@ axios.interceptors.response.use(res => {
   console.log(statusCode);
   console.log(message);
   if (statusCode && statusCode == '401') {
+    // 处理错误，在入口文件如果想要使用 vant ui 弹出窗口、
+    // 这里没有 this 也没有 $toast
+    // 可以使用单独引入的方式，只使用 Toast
+    Toast.fail('用户信息校验失败，重新登录')
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     router.replace('/login')
