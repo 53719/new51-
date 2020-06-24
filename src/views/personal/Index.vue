@@ -11,7 +11,7 @@
         </div>
         <div class="data">{{userInfo.create_date.split('T')[0]}}</div>
       </div>
-      <a href="#" class="iconfont iconjiantou1" @click="token1"></a>
+      <span class="iconfont iconjiantou1" @click="token1"></span>
     </div>
 
     <div>

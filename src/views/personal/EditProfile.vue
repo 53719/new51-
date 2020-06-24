@@ -1,7 +1,7 @@
 <template>
   <div v-if="userInfo">
     <div class="profile">
-      <a href="#" class="iconfont iconjiantou2" @click="token2"></a>
+      <span  class="iconfont iconjiantou2" @click="token2"></span>
       <h5>编辑资料</h5>
     </div>
     <div>
