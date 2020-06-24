@@ -67,7 +67,7 @@ export default {
       localStorage.removeItem('userId')
       localStorage.removeItem('token')
       //跳转
-      this.$router.replace('/')
+      this.$router.replace('/login')
     },
     token1(){
          this.$router.replace({path:'/edit'})

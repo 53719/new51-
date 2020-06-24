@@ -13,8 +13,32 @@ Vue.use(Vant);
 // 引入请求库 axios
 // 1. 引入库
 import axios from 'axios';
+// 设置基准路径
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
 // 2. 注册到 Vue 原型上
 Vue.prototype.$axios = axios;
+
+// 设置响应式拦截器
+// axios.interceptors.response.use()  这个函数可以拦截到所有请求的响应,并且执行逻辑
+//我们需要将逻辑函数作为参数传递
+axios.interceptors.response.use(res => {
+  console.log('发送了请求');
+  
+  const {statusCode,message}=res.data
+  console.log(statusCode);
+  console.log(message);
+  if (statusCode && statusCode == '401') {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    router.replace('/login')
+  }
+  
+  
+  //res 是每次请求得到的结果 相当于.then的res还没有到达之前在这里被拦住了
+  // 拦截器把结果拦住,卡死整个执行过程,执行我们要的函数以后,需要得用 return放行
+  //相当于next()
+return res
+})
 
 // 路由守卫
 // 全局前置路由守卫,会在所有路由发生效果之前进行拦截
@@ -22,8 +46,8 @@ Vue.prototype.$axios = axios;
 router.beforeEach((to, from, next) => {
   //to 指的是目标来源信息
   //from 指的是来源路由信息
-  console.log(to);
-  console.log(from);
+  console.log('to',to);
+  console.log('from',from);
 
   // 如果目的地是个人中心才需要校验
   if (to.name == 'PersonindexPage') {
