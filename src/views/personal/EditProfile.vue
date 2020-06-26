@@ -14,9 +14,14 @@
       <img v-else src="@/assets/logo1.png" alt class="avatar" />
     </div>
 
-    <NavBar LabelText="昵称" :descText="userInfo.nickname" />
+    <NavBar LabelText="昵称" :descText="userInfo.nickname"  @barClick="shownickname = true"/>
     <NavBar LabelText="密码" descText="*****" />
     <NavBar LabelText="性别" :descText="userInfo.gender==1?'男':'女'" />
+
+    <!-- 这里是专门放弹窗组件的地方 -->
+    <van-dialog v-model="shownickname" title="昵称修改" show-cancel-button @confirm="setNewNickname">
+       <van-field v-model="newNickname" placeholder="请输入新昵称"/> 
+    </van-dialog>
   </div>
 </template>
 
@@ -28,11 +33,18 @@ export default {
   },
   data() {
     return {
-      userInfo: null
+      userInfo: null,
+      shownickname:false,
+      newNickname:''
     };
   },
   created() {
-    // 这个钩子函数是创建完毕，数据准备完毕，但是 dom 还没有
+    this.loadpage()
+  },
+  methods: {
+    loadpage(){
+       // 这个钩子函数是创建完毕，数据准备完毕，但是 dom 还没有
+       // 封装页面加载新数据的函数 方便调用
     this.$axios({
       url: "/user/" + localStorage.getItem("userId"),
       method: "get",
@@ -46,10 +58,31 @@ export default {
         console.log(this.userInfo);
       }
     });
-  },
-  methods: {
+    },
     token2(){
         this.$router.replace({path:'/personal'})
+    },
+    setNewNickname(){
+      console.log('输入的内容是',this.newNickname);
+      this.$axios({
+        url:'/user_update/'+localStorage.getItem('userId'),
+        method:'post',
+        data:{
+          nickname:this.newNickname
+        },
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+        },
+      }).then(res=>{
+        console.log(res.data);
+        //直接赋值是一种可行的方法
+        // this.userInfo.nickname=this.newNickname
+        //还是建议修改完从远处获取一次新数据
+        if(res.data.message=='修改成功'){
+          this.loadpage()
+        }
+
+      })
     }
   }
 };
