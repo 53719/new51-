@@ -15,12 +15,15 @@
     </div>
 
     <NavBar LabelText="昵称" :descText="userInfo.nickname"  @barClick="shownickname = true"/>
-    <NavBar LabelText="密码" descText="*****" />
+    <NavBar LabelText="密码" descText="*****" @barClick="showpassword = true"/>
     <NavBar LabelText="性别" :descText="userInfo.gender==1?'男':'女'" />
 
     <!-- 这里是专门放弹窗组件的地方 -->
     <van-dialog v-model="shownickname" title="昵称修改" show-cancel-button @confirm="setNewNickname">
        <van-field v-model="newNickname" placeholder="请输入新昵称"/> 
+    </van-dialog>
+    <van-dialog v-model="showpassword" title="密码修改" show-cancel-button @confirm="setNewpassword">
+       <van-field v-model="newpassword" placeholder="请输入新密码"/> 
     </van-dialog>
   </div>
 </template>
@@ -35,7 +38,9 @@ export default {
     return {
       userInfo: null,
       shownickname:false,
-      newNickname:''
+      newNickname:'',
+      showpassword:false,
+      newpassword:'',
     };
   },
   created() {
@@ -81,7 +86,27 @@ export default {
         if(res.data.message=='修改成功'){
           this.loadpage()
         }
-
+      })
+    },
+    setNewpassword(){
+      console.log('新密码');
+       this.$axios({
+        url:'/user_update/'+localStorage.getItem('userId'),
+        method:'post',
+        data:{
+          password:this.newpassword
+        },
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+        },
+      }).then(res=>{
+        console.log(res.data);
+        //直接赋值是一种可行的方法
+        // this.userInfo.nickname=this.newNickname
+        //还是建议修改完从远处获取一次新数据
+        if(res.data.message=='修改成功'){
+          this.loadpage()
+        }
       })
     }
   }
