@@ -75,9 +75,6 @@ export default {
       this.$axios({
         url: "/user/" + localStorage.getItem("userId"),
         method: "get",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
       }).then(res => {
         const { message, data } = res.data;
         if (message == "获取成功") {
@@ -94,9 +91,6 @@ export default {
         url: "/user_update/" + localStorage.getItem("userId"),
         method: "post",
         data: newData,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
       }).then(res => {
         console.log(res.data);
         //直接赋值是一种可行的方法
@@ -123,9 +117,6 @@ export default {
         url: '/upload',
         method: 'post',
         data: formData,
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
       }).then(res=>{
          console.log(res.data);
          const { message, data } = res.data
