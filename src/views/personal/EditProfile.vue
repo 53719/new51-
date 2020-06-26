@@ -19,10 +19,10 @@
     <NavBar LabelText="性别" :descText="userInfo.gender==1?'男':'女'" />
 
     <!-- 这里是专门放弹窗组件的地方 -->
-    <van-dialog v-model="shownickname" title="昵称修改" show-cancel-button @confirm="setNewNickname">
+    <van-dialog v-model="shownickname" title="昵称修改" show-cancel-button @confirm="editprofile({nickname:newNickname})">
        <van-field v-model="newNickname" placeholder="请输入新昵称"/> 
     </van-dialog>
-    <van-dialog v-model="showpassword" title="密码修改" show-cancel-button @confirm="setNewpassword">
+    <van-dialog v-model="showpassword" title="密码修改" show-cancel-button @confirm="editprofile({password:newpassword})">
        <van-field v-model="newpassword" placeholder="请输入新密码"/> 
     </van-dialog>
   </div>
@@ -67,35 +67,11 @@ export default {
     token2(){
         this.$router.replace({path:'/personal'})
     },
-    setNewNickname(){
-      console.log('输入的内容是',this.newNickname);
-      this.$axios({
-        url:'/user_update/'+localStorage.getItem('userId'),
-        method:'post',
-        data:{
-          nickname:this.newNickname
-        },
-        headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-        },
-      }).then(res=>{
-        console.log(res.data);
-        //直接赋值是一种可行的方法
-        // this.userInfo.nickname=this.newNickname
-        //还是建议修改完从远处获取一次新数据
-        if(res.data.message=='修改成功'){
-          this.loadpage()
-        }
-      })
-    },
-    setNewpassword(){
-      console.log('新密码');
+    editprofile(newData){
        this.$axios({
         url:'/user_update/'+localStorage.getItem('userId'),
         method:'post',
-        data:{
-          password:this.newpassword
-        },
+        data:newData,
         headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
         },
