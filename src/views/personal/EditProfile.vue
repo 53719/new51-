@@ -4,7 +4,7 @@
       <span class="iconfont iconjiantou2" @click="token2"></span>
       <h5>编辑资料</h5>
     </div>
-    <div>
+    <div class="box1">
       <img
         v-if="userInfo.head_img"
         :src="$axios.defaults.baseURL + userInfo.head_img"
@@ -12,6 +12,7 @@
         class="avatar"
       />
       <img v-else src="@/assets/logo1.png" alt class="avatar" />
+      <van-uploader :after-read="uploadAvatar"/>
     </div>
 
     <NavBar LabelText="昵称" :descText="userInfo.nickname" @barClick="shownickname = true" />
@@ -112,7 +113,28 @@ export default {
       // },
       this.editprofile({ gender: item.gender });
       //选择完毕之后隐藏弹出界面
-      this.showGender=false
+      this.showGender = false;
+    },
+    uploadAvatar(fileObj){
+       var formData = new FormData();
+      formData.append('file',fileObj.file)
+
+       this.$axios({
+        url: '/upload',
+        method: 'post',
+        data: formData,
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(res=>{
+         console.log(res.data);
+         const { message, data } = res.data
+        if(message=='文件上传成功'){
+             this.editprofile({
+             head_img: data.url
+             })
+        }
+      })
     }
   }
 };
@@ -127,10 +149,20 @@ export default {
     padding-left: 30vw;
   }
 }
-img {
-  width: 30vw;
-  height: 30vw;
-  padding: 5vw 35vw;
-  border-radius: 50%;
+.box1 {
+ height: 38.889vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .avatar {
+    width: 25.444vw;
+    height: 25.444vw;
+    border-radius: 50%;
+  }
+  .van-uploader {
+    position: absolute;
+    opacity: 0;
+  }
 }
 </style>
