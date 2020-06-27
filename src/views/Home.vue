@@ -4,28 +4,12 @@
       
     <van-tabs v-model="activeTab">
 
-      <van-tab title="体育">
-        这里应该放体育新闻
-      </van-tab>
-
-      <van-tab title="标签 2">
-        内容 2
-      </van-tab>
-      
-      <van-tab title="标签 2">
-        内容 2
-      </van-tab>
-
-       <van-tab title="体育">
-        这里应该放体育新闻
-      </van-tab>
-
-      <van-tab title="标签 2">
-        内容 2
-      </van-tab>
-      
-      <van-tab title="标签 2">
-        内容 2
+      <van-tab 
+        :title="category.name"
+        v-for="category in categoriesList"
+        :key="category.id"
+      >
+         这里应该放 {{category.name}} 新闻
       </van-tab>
     </van-tabs>
   </div>
@@ -39,14 +23,18 @@ export default {
   },
   data() {
     return {
-       activeTab: 0
+       activeTab: 0,
+       categoriesList: []
     };
   },
 
-  mounted(){
-    setTimeout(()=>{
-      this.activeTab=3
-    },2000)
+  created(){
+       this.$axios({
+      url: '/category'
+    }).then(res=>{
+      console.log(res.data);
+      this.categoriesList = res.data.data
+    })
   }
 };
 </script>
