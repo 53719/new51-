@@ -8,7 +8,9 @@ import PersonIndex from '@/views/personal/Index'
 //编辑资料页面
 import EditProfile from '@/views/personal/EditProfile'
 //我的关注
-import follows from '@/views/personal//follows'
+import follows from '@/views/personal/follows'
+//测试页面
+import Test from '@/views/Test'
 
 Vue.use(VueRouter)
 
@@ -28,6 +30,7 @@ const routes = [
     name: 'RegisterPage',
     component: Register
   },
+
 
   //个人中心
   {
@@ -52,6 +55,12 @@ const routes = [
     component: follows
   },
 
+  //测试页面
+  {
+    path: '/test',
+    name:'testPage',
+    component: Test
+  },
 ]
 
 const router = new VueRouter({
