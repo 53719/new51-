@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 //个人中心页面

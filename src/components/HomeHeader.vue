@@ -21,7 +21,7 @@ export default {
     align-items: center;
     background-color: red;
     color: white;
-    padding: 1.111vw 2.778vw;
+    padding: 0 2.778vw;
     .iconnew {
         font-size: 15vw;
     }
