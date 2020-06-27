@@ -2,20 +2,12 @@
   <div>
     <TopNav titleText="我的关注" />
     <div class="list">
-      <div class="item">
-        <img class="avatar" src="@/assets/logo1.png" alt />
+      <div class="item" v-for="item in followsList" :key="item.id">
+        <img class="avatar" v-if="item.head_img" src="$axios.defaults.baseURL + item.head_img" alt="">
+        <img class="avatar" v-else src="@/assets/logo1.png" alt />
         <div class="info">
-          <div class="name">上流ZOOM</div>
-          <div class="data">2020-09-01</div>
-        </div>
-        <div class="btnUnfollow">取消关注</div>
-      </div>
-
-      <div class="item">
-        <img class="avatar" src="@/assets/logo.png" alt />
-        <div class="info">
-          <div class="name">369</div>
-          <div class="data">2020-09-01</div>
+          <div class="name">{{item.nickname}}</div>
+          <div class="data">{{item.create_date.split('T')[0]}}</div>
         </div>
         <div class="btnUnfollow">取消关注</div>
       </div>
@@ -28,7 +20,23 @@ import TopNav from "@/components/TopNav";
 export default {
   components: {
     TopNav
+  },
+  data () {
+    return {
+      followsList:[]
+    }
+  },
+  // 页面一加载就开始加载数据
+  created(){
+    this.$axios({
+     url: '/user_follows',
+    //  method:'get',
+    }).then(res=>{
+      console.log(res.data);
+      this.followsList=res.data.data;
+    })
   }
+
 };
 </script>
 
