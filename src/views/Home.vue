@@ -4,7 +4,8 @@
 
     <van-tabs v-model="activeTab">
       <van-tab :title="category.name" v-for="category in categoriesList" :key="category.id">
-        <div v-for="post in postList" :key="post.id">{{post.title}}</div>
+        <!-- <div v-for="post in postList" :key="post.id">{{post.title}}</div> -->
+        <PostItem :postData="post" v-for="post in postList" :key="post.id"/>
       </van-tab>
     </van-tabs>
   </div>
@@ -12,9 +13,11 @@
 
 <script>
 import HomeHeader from "@/components/HomeHeader";
+import PostItem from '@/components/PostItem'
 export default {
   components: {
-    HomeHeader
+    HomeHeader,
+    PostItem
   },
   data() {
     return {
