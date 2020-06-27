@@ -3,13 +3,13 @@
     <TopNav titleText="我的关注" />
     <div class="list">
       <div class="item" v-for="item in followsList" :key="item.id">
-        <img class="avatar" v-if="item.head_img" src="$axios.defaults.baseURL + item.head_img" alt="">
+        <img class="avatar" v-if="item.head_img" src="$axios.defaults.baseURL + item.head_img" alt />
         <img class="avatar" v-else src="@/assets/logo1.png" alt />
         <div class="info">
           <div class="name">{{item.nickname}}</div>
           <div class="data">{{item.create_date.split('T')[0]}}</div>
         </div>
-        <div class="btnUnfollow">取消关注</div>
+        <div class="btnUnfollow" @click="unfollow(item.id)">取消关注</div>
       </div>
     </div>
   </div>
@@ -21,22 +21,34 @@ export default {
   components: {
     TopNav
   },
-  data () {
+  data() {
     return {
-      followsList:[]
-    }
+      followsList: []
+    };
   },
   // 页面一加载就开始加载数据
-  created(){
-    this.$axios({
-     url: '/user_follows',
-    //  method:'get',
-    }).then(res=>{
-      console.log(res.data);
-      this.followsList=res.data.data;
-    })
+  created() {
+    //封装渲染页面方便页面修改时调用
+    this.loadPage();
+  },
+  methods: {
+    loadPage() {
+      this.$axios({
+        url: "/user_follows"
+      }).then(res => {
+        console.log(res.data);
+        this.followsList = res.data.data;
+      });
+    },
+    unfollow(id) {
+      this.$axios({
+        url: "/user_unfollow/" + id
+      }).then(res => {
+        console.log(res.data);
+        this.loadPage();
+      });
+    }
   }
-
 };
 </script>
 
