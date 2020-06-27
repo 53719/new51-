@@ -7,6 +7,8 @@ import Register from '@/views/Register'
 import PersonIndex from '@/views/personal/Index'
 //编辑资料页面
 import EditProfile from '@/views/personal/EditProfile'
+//我的关注
+import follows from '@/views/personal//follows'
 
 Vue.use(VueRouter)
 
@@ -23,25 +25,32 @@ const routes = [
   },
   {
     path: '/Register',
-    name:'RegisterPage',
+    name: 'RegisterPage',
     component: Register
   },
+
+  //个人中心
   {
     path: '/personal',
-    name:'PersonindexPage',
+    name: 'PersonindexPage',
     component: PersonIndex,
     meta: {
       auth: true
     }
   },
-  { path: '/edit',
-  name:'editpage',
+  {
+    path: '/edit',
+    name: 'editpage',
     component: EditProfile,
     meta: {
       auth: true
     }
-  }
- 
+  },
+  {
+    path: '/follows',
+    name: 'followpage',
+    component: follows
+  },
 
 ]
 
