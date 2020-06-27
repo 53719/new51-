@@ -1,9 +1,6 @@
 <template>
   <div v-if="userInfo">
-    <div class="profile">
-      <span class="iconfont iconjiantou2" @click="token2"></span>
-      <h5>编辑资料</h5>
-    </div>
+    <TopNav titleText="资料修改页" />
     <div class="box1">
       <img
         v-if="userInfo.head_img"
@@ -12,7 +9,7 @@
         class="avatar"
       />
       <img v-else src="@/assets/logo1.png" alt class="avatar" />
-      <van-uploader :after-read="uploadAvatar"/>
+      <van-uploader :after-read="uploadAvatar" />
     </div>
 
     <NavBar LabelText="昵称" :descText="userInfo.nickname" @barClick="shownickname = true" />
@@ -43,9 +40,11 @@
 
 <script>
 import NavBar from "@/components/Nabbar";
+import TopNav from "@/components/TopNav";
 export default {
   components: {
-    NavBar
+    NavBar,
+    TopNav
   },
   data() {
     return {
@@ -74,7 +73,7 @@ export default {
     loadpage() {
       this.$axios({
         url: "/user/" + localStorage.getItem("userId"),
-        method: "get",
+        method: "get"
       }).then(res => {
         const { message, data } = res.data;
         if (message == "获取成功") {
@@ -83,14 +82,11 @@ export default {
         }
       });
     },
-    token2() {
-      this.$router.replace({ path: "/personal" });
-    },
     editprofile(newData) {
       this.$axios({
         url: "/user_update/" + localStorage.getItem("userId"),
         method: "post",
-        data: newData,
+        data: newData
       }).then(res => {
         console.log(res.data);
         //直接赋值是一种可行的方法
@@ -109,23 +105,23 @@ export default {
       //选择完毕之后隐藏弹出界面
       this.showGender = false;
     },
-    uploadAvatar(fileObj){
-       var formData = new FormData();
-      formData.append('file',fileObj.file)
+    uploadAvatar(fileObj) {
+      var formData = new FormData();
+      formData.append("file", fileObj.file);
 
-       this.$axios({
-        url: '/upload',
-        method: 'post',
-        data: formData,
-      }).then(res=>{
-         console.log(res.data);
-         const { message, data } = res.data
-        if(message=='文件上传成功'){
-             this.editprofile({
-             head_img: data.url
-             })
+      this.$axios({
+        url: "/upload",
+        method: "post",
+        data: formData
+      }).then(res => {
+        console.log(res.data);
+        const { message, data } = res.data;
+        if (message == "文件上传成功") {
+          this.editprofile({
+            head_img: data.url
+          });
         }
-      })
+      });
     }
   }
 };
@@ -141,7 +137,7 @@ export default {
   }
 }
 .box1 {
- height: 38.889vw;
+  height: 38.889vw;
   display: flex;
   justify-content: center;
   align-items: center;

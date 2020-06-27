@@ -1,35 +1,34 @@
 <template>
   <div class="navWrapper" @click="handleClick">
-      <div class="label">{{LabelText}}</div>
-      <div class="desc">{{descText}}</div>
-      <a href="#" class="iconfont iconjiantou1" ></a>
+    <div class="label">{{LabelText}}</div>
+    <div class="desc">{{descText}}</div>
+    <span class="iconfont iconjiantou1"></span>
   </div>
 </template>
 
 <script>
 export default {
-props:['LabelText','descText'],
-methods:{
-  handleClick(){
-    console.log('横条子组件被点击');
-    this.$emit('barClick')
-    
+  props: ["LabelText", "descText"],
+  methods: {
+    handleClick() {
+      console.log("横条子组件被点击");
+      this.$emit("barClick");
+    }
   }
-}
-}
+};
 </script>
 
 <style lang="less" scoped>
-.navWrapper{
+.navWrapper {
   display: flex;
   padding: 4.444vw 6.667vw 4.444vw 0;
   margin-left: 6.667vw;
   border-bottom: 1px solid #e4e4e4;
-  .label{
+  .label {
     font-size: 3.889vw;
-    color:#333;
+    color: #333;
   }
-  .desc{
+  .desc {
     flex: 1;
     text-align: right;
     font-size: 3.333vw;
