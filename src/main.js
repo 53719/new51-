@@ -43,7 +43,7 @@ axios.interceptors.response.use(res=>{
   console.log(statusCode);
   console.log(message);
   
-  if (statusCode && statusCode == 401) {
+  if (message=='用户信息验证失败') {
     // 处理错误，在入口文件如果想要使用 vant ui 弹出窗口、
     // 这里没有 this 也没有 $toast
     // 可以使用单独引入的方式，只使用 Toast
