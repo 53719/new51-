@@ -97,6 +97,15 @@ router.beforeEach((to, from, next)=>{
 })
 
 
+// 创建一个修复图片地址的全局过滤器
+Vue.filter('fixImgUrl', function(url) {
+  const fullUrlReg = /^http/;
+  if (fullUrlReg.test(url)) {
+    return url
+  }else {
+    return axios.defaults.baseURL + url
+  }
+})
 
 Vue.config.productionTip = false
 

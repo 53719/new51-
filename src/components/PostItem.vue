@@ -4,28 +4,28 @@
         按照 cover 属性的长度, 如果小于三 就显示一张图的格式
         如果大于等于三就显示三张图的格式
     如果是 2 就是视频文章-->
-    <div class="singleImg" v-if="postData.type == 1 && postData.cover.length < 3">
+    <div class="singleImg" v-if="postData.type == 1 && postData.cover.length >=1 && postData.cover.length < 3">
       <div class="left">
         <div class="title">{{postData.title}}</div>
         <div class="info">{{postData.user.nickname}} {{postData.comment_length}}跟帖</div>
       </div>
-      <img :src="postData.cover[0].url" alt class="right" />
+      <img :src="postData.cover[0].url | fixImgUrl" alt class="right" />
     </div>
 
     <div class="multiImg" v-if="postData.type == 1 && postData.cover.length >=3">
       <div class="title">{{postData.title}}</div>
       <div class="imgs">
-        <img :src="postData.cover[0].url" alt />
-        <img :src="postData.cover[1].url" alt />
-        <img :src="postData.cover[2].url" alt />
+        <img :src="postData.cover[0].url | fixImgUrl" alt />
+        <img :src="postData.cover[1].url | fixImgUrl" alt />
+        <img :src="postData.cover[2].url | fixImgUrl" alt />
       </div>
       <div class="info">{{postData.user.nickname}} {{postData.comment_length}}跟帖</div>
     </div>
 
-    <div class="video" v-if="postData.type == 2">
+    <div class="video" v-if="postData.type == 2  && postData.cover.length>=1">
             <div class="title">{{postData.title}}</div>
             <div class="coverWrapper">
-                <img :src="postData.cover[0].url" alt="">
+                <img :src="postData.cover[0].url | fixImgUrl" alt="">
                 <div class="iconfont iconshipin"></div>
             </div>
             <div class="info">
