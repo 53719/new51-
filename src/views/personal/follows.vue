@@ -2,14 +2,15 @@
   <div>
     <TopNav titleText="我的关注" />
     <div class="list">
-      <div class="item" v-for="item in followsList" :key="item.id">
-        <img class="avatar" v-if="item.head_img" src="$axios.defaults.baseURL + item.head_img" alt />
-        <img class="avatar" v-else src="@/assets/logo1.png" alt />
+      <div class="item" v-for="(item,index) in followsList" :key="item.id">
+        <img class="avatar" v-if="item.head_img" :src="$axios.defaults.baseURL + item.head_img" alt />
+        <img class="avatar" v-else src="@/assets/logo.png" alt />
         <div class="info">
           <div class="name">{{item.nickname}}</div>
-          <div class="data">{{item.create_date.split('T')[0]}}</div>
+          <div class="date">{{item.create_date.split('T')[0]}}</div>
         </div>
-        <div class="btnUnfollow" @click="unfollow(item.id)">取消关注</div>
+        <div v-if="item.isFollow" class="btnUnfollow" @click="unfollow(item.id, index)">取消关注</div>
+        <div v-else class="btnFollow" @click="follow(item.id, index)">关注</div>
       </div>
     </div>
   </div>
@@ -26,26 +27,58 @@ export default {
       followsList: []
     };
   },
-  // 页面一加载就开始加载数据
+  // 页面一开始就要加载数据
+  // 数据的获取可以放在
+  // created / mounted 都可以
   created() {
-    //封装渲染页面方便页面修改时调用
     this.loadPage();
   },
   methods: {
     loadPage() {
       this.$axios({
         url: "/user_follows"
+        // method: 'get'
       }).then(res => {
         console.log(res.data);
-        this.followsList = res.data.data;
+        // 获取关注数据的时候, 所有结果数组中的用户,
+        // 都是我已经关注的, 但是我希望一旦点击取消
+        // 就会在这个用户上添加标记, 方便我的重新关注
+        // 这种情况下,获取到的数据本身属性并不满足我们的需求,
+        // 就可以在这直接改造
+        // 但是请注意,改造必须在赋值之前完成,
+        // 因为如果是整体赋值, vue 会响应式更新
+        // 但是如果是赋值以后, 再单独修改对象里面的某个数据
+        // this.followsList = res.data.data;
+        // 1. 用一个映射生成相同的用户列表
+        console.log(res.data.data);
+
+        const newData = res.data.data.map(user => {
+          return { ...user, isFollow: true };
+        });
+
+        console.log(newData);
+
+        this.followsList = newData;
       });
     },
-    unfollow(id) {
+    unfollow(id, index) {
       this.$axios({
         url: "/user_unfollow/" + id
       }).then(res => {
         console.log(res.data);
-        this.loadPage();
+        // 之前取消关注成功,直接重新获取数据
+        // this.loadPage();
+        // 现在只需要改造当前的关注列表即可
+        this.followsList[index].isFollow = false;
+      });
+    },
+    follow(id, index) {
+      this.$axios({
+        url: "/user_follows/" + id,
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
+        this.followsList[index].isFollow = true;
       });
     }
   }
@@ -83,6 +116,15 @@ export default {
     height: 8.333vw;
     line-height: 8.333vw;
     border-radius: 4.167vw;
+  }
+  .btnFollow {
+    font-size: 3.333vw;
+    background: red;
+    padding: 0 2.778vw;
+    height: 8.333vw;
+    line-height: 8.333vw;
+    border-radius: 4.167vw;
+    color: white;
   }
 }
 </style>
