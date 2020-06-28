@@ -23,7 +23,9 @@ export default {
     return {
       activeTab: 0,
       categoriesList: [],
-      postList: []
+      postList: [],
+      pageIndex: 1,
+      pageSize: 6
     };
   },
 
@@ -74,15 +76,18 @@ export default {
       });
     },
     getPost() {
+      const currentCategory = this.categoriesList[this.activeTab];
       this.$axios({
         url: "/post",
         params: {
-          category: this.categoryId
+          category: this.categoryId,
+          pageInde: currentCategory.pageIndex,
+          pageSize: currentCategory.pageSize
         }
       }).then(res => {
         console.log(res.data);
         // this.postList = res.data.data;
-        const currentCategory = this.categoriesList[this.activeTab]
+        // const currentCategory = this.categoriesList[this.activeTab]
          currentCategory.postList = res.data.data
       });
     }
