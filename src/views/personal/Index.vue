@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="profile" v-if="userInfo">
-        <img v-if="userInfo.head_img" :src="$axios.defaults.baseURL + userInfo.head_img" alt="" class="avatar">
-        <img v-else src="@/assets/logo1.png" alt="" class="avatar">
+      <img
+        v-if="userInfo.head_img"
+        :src="$axios.defaults.baseURL + userInfo.head_img"
+        alt
+        class="avatar"
+      />
+      <img v-else src="@/assets/logo1.png" alt class="avatar" />
       <div class="info">
         <div class="name">
           <span class="iconfont iconxingbienan" v-if="userInfo.gender ==1"></span>
@@ -16,11 +21,11 @@
 
     <div>
       <NavBar LabelText="我的关注" descText="关注的用户" @barClick="$router.replace({path:'/follows'})" />
-      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />     
+      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />
       <NavBar LabelText="我的收藏" descText="文章/视频" @barClick="handleBar('收藏')" />
-      <NavBar LabelText="设置" descText="" @barClick="handleBar('设置')" />
+      <NavBar LabelText="设置" descText @barClick="handleBar('设置')" />
     </div>
-    <AuthBtn btnText="注销/退出" @clicked="logout()"/>
+    <AuthBtn btnText="注销/退出" @clicked="logout()" />
   </div>
 </template>
 
@@ -58,18 +63,17 @@ export default {
     handleBar(pagename) {
       console.log(pagename);
     },
-     logout(){
+    logout() {
       //清理数据
-      localStorage.removeItem('userId')
-      localStorage.removeItem('token')
+      localStorage.removeItem("userId");
+      localStorage.removeItem("token");
       //跳转
-      this.$router.replace('/login')
+      this.$router.replace("/login");
     },
-    token1(){
-         this.$router.replace({path:'/edit'})
+    token1() {
+      this.$router.replace({ path: "/edit" });
     }
-  },
- 
+  }
 };
 </script>
 

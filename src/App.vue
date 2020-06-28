@@ -1,27 +1,65 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="switch">
+      <router-link to="/">
+        <span class="iconfont iconnew"></span>
+      </router-link>
+      <router-link to="/personal">
+        <span class="iconfont iconwode"></span>
+      </router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <style lang="less">
 // 全局引入字体图标
-@import url('http://at.alicdn.com/t/font_1426139_h6vn3jbl5q.css');
+@import url("http://at.alicdn.com/t/font_1426139_h6vn3jbl5q.css");
 //全局的 css reset设置
-*{
-    margin:0;
-    padding:0;
-}
-    
-a{
-    color: inherit;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a:hover{
-    text-decoration: none;
+a {
+  color: inherit;
 }
 
-ul,li,ol{
-    list-style: none;
+a:hover {
+  text-decoration: none;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+}
+.switch {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100vw;
+  height: 13.333vw;
+  background-color: #000;
+  z-index: 999;
+  .iconnew {
+    float: left;
+    width: 50vw;
+    text-align: center;
+    line-height: 13.333vw;
+    font-size: 25vw;
+    color: #fff;
+    border-right: 1px solid #fff;
+  }
+  .iconwode {
+    float: left;
+    width: 50vw;
+    text-align: center;
+    line-height: 13.333vw;
+    font-size: 9.722vw;
+    color: #fff;
+    border-right: 1px solid #fff;
+  }
 }
 </style>

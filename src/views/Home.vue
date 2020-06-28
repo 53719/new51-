@@ -5,7 +5,7 @@
     <van-tabs v-model="activeTab">
       <van-tab :title="category.name" v-for="category in categoriesList" :key="category.id">
         <!-- <div v-for="post in postList" :key="post.id">{{post.title}}</div> -->
-        <PostItem :postData="post" v-for="post in postList" :key="post.id"/>
+        <PostItem :postData="post" v-for="post in category.postList" :key="post.id" />
       </van-tab>
     </van-tabs>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 import HomeHeader from "@/components/HomeHeader";
-import PostItem from '@/components/PostItem'
+import PostItem from "@/components/PostItem";
 export default {
   components: {
     HomeHeader,
@@ -46,19 +46,27 @@ export default {
   },
 
   methods: {
-        getCategories() {
+    getCategories() {
       this.$axios({
-        url: '/category'
-      }).then(res=>{
+        url: "/category"
+      }).then(res => {
         console.log(res.data);
-        this.categoriesList = res.data.data
+        // this.categoriesList = res.data.data
         // 只有获取完了栏目数据, 才可以开始获取文章数据
         // 获取文章需要发送一个 ajax 请求, 建议另外封装函数
-        this.getPost()
-      })
+        const newData = res.data.data.map(category => {
+          return {
+            ...category,
+            postList: []
+          };
+        });
+        this.categoriesList = newData;
+        console.log(this.categoriesList);
+        
+         this.getPost();
+      });
     },
     getPost() {
-
       this.$axios({
         url: "/post",
         params: {
@@ -66,7 +74,9 @@ export default {
         }
       }).then(res => {
         console.log(res.data);
-        this.postList = res.data.data;
+        // this.postList = res.data.data;
+        const currentCategory = this.categoriesList[this.activeTab]
+         currentCategory.postList = res.data.data
       });
     }
   }

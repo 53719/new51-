@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <span class="iconfont iconjiantou2" @click="backClick"></span>
+    <span class="iconfont iconjiantou2" @click="$router.push('/personal')"></span>
     <div class="title">{{titleText}}</div>
   </div>
 </template>
@@ -9,9 +9,9 @@
 export default {
   props: ["titleText"],
   methods: {
-    backClick() {
-      this.$router.replace({ path: "/personal" });
-    }
+    // backClick() {
+    //   this.$router.replace({ path: "/personal" });
+    // }
   }
 };
 </script>
