@@ -5,7 +5,7 @@
           <span class="iconfont iconsearch"></span>
           搜索新闻
       </div>
-    <span class="iconfont iconwode"></span>
+    <span class="iconfont iconwode" @click="$router.push('/personal')"></span>
   </div>
 </template>
 

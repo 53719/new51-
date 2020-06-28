@@ -22,7 +22,16 @@
       <div class="info">{{postData.user.nickname}} {{postData.comment_length}}跟帖</div>
     </div>
 
-    <div class="video" v-if="postData.type == 2">{{postData.title}}</div>
+    <div class="video" v-if="postData.type == 2">
+            <div class="title">{{postData.title}}</div>
+            <div class="coverWrapper">
+                <img :src="postData.cover[0].url" alt="">
+                <div class="iconfont iconshipin"></div>
+            </div>
+            <div class="info">
+                {{postData.user.nickname}} {{postData.comment_length}}跟帖
+            </div>
+    </div>
   </div>
 </template>
 
@@ -33,9 +42,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-singleImg {
+.singleImg {
     display: flex;
-    padding: 16px 10px;
+    padding: 4.444vw 2.778vw;
     border-bottom: 1px solid #e4e4e4;
     .left {
         flex: 1;
@@ -43,38 +52,73 @@ singleImg {
         flex-direction: column;
         justify-content: space-around;
         .title {
-            font-size: 16px;
+            font-size: 4.444vw;
         }
         .info {
-            font-size: 14px;
+            font-size: 3.889vw;
             color: #888;
         }
     }
     .right {
-        width: 120px;
-        height: 74px;
+        width: 33.333vw;
+        height: 20.556vw;
         object-fit: cover;
     }
 }
 
 .multiImg {
-    padding: 16px 10px;
+    padding: 4.444vw 2.778vw;
     border-bottom: 1px solid #e4e4e4;
     .title {
-        font-size: 16px;
+        font-size: 4.444vw;
     }
     .imgs {
         display: flex;
         justify-content: space-between;
-        padding: 4px 0 8px;
+        padding: 1.111vw 0 2.222vw;
         img {
             width: 33%;
-            height: 74px;
+            height: 20.556vw;
+            object-fit: cover;
         }
     }
     .info {
-        font-size: 14px;
+        font-size: 3.889vw;
         color: #888;
     }
 }
+.video {
+    padding: 4.444vw 2.778vw;
+    border-bottom: 1px solid #e4e4e4;
+    .title {
+        font-size: 4.444vw;
+    }
+    .coverWrapper {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        padding: 1.111vw 0 2.222vw;
+        img {
+            width: 100%;
+            height: 47.222vw;
+            object-fit: cover;
+        }
+        .iconshipin {
+            position: absolute;
+            font-size: 12.778vw;
+            height: 12.778vw;
+            line-height: 12.778vw;
+            text-align: center;
+            background: #aaa;
+            color: white;
+            border-radius: 50%;
+        }
+    }
+    .info {
+        font-size: 3.889vw;
+        color: #888;
+    }
+}
+
 </style>
