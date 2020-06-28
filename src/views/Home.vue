@@ -4,8 +4,11 @@
 
     <van-tabs v-model="activeTab">
       <van-tab :title="category.name" v-for="category in categoriesList" :key="category.id">
-        <!-- <div v-for="post in postList" :key="post.id">{{post.title}}</div> -->
-        <PostItem :postData="post" v-for="post in category.postList" :key="post.id" />
+        <!-- <PostItem :postData="post" v-for="post in category.postList" :key="post.id" /> -->
+         <van-list>
+          <PostItem :postData="post" v-for="post in category.postList" :key="post.id"/>
+          <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
+        </van-list>
       </van-tab>
     </van-tabs>
   </div>
