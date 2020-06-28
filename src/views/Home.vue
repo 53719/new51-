@@ -10,6 +10,7 @@
           :finished="category.finished"
           @load="loadMorePost"
           :immediate-check="false"
+          finished-text="别再拉拉扯扯"
         >
           <PostItem :postData="post" v-for="post in category.postList" :key="post.id" />
           <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
@@ -32,9 +33,13 @@ export default {
       activeTab: 0,
       categoriesList: [],
       postList: [],
+      //当前页码
       pageIndex: 1,
+      //每页长度
       pageSize: 6,
+      // 是否在加载
       loading: false,
+      // 是否已经全部加载
       finished: false
     };
   },
@@ -89,10 +94,10 @@ export default {
       // 读取更多文章, 实际上
       // 就是将当前栏目的 pageIndex 加一
       // 发送文章获取请求即可
-      console.log('加载下一页');
-      
-      const currentCategory = this.categoriesList[this.activeTab]
-      currentCategory.pageIndex += 1
+      console.log("加载下一页");
+
+      const currentCategory = this.categoriesList[this.activeTab];
+      currentCategory.pageIndex += 1;
       this.getPost();
     },
     getPost() {
@@ -109,7 +114,22 @@ export default {
         // this.postList = res.data.data;
         // const currentCategory = this.categoriesList[this.activeTab]
         // currentCategory.postList = res.data.data;
-         currentCategory.postList = [...currentCategory.postList, ...res.data.data]
+        currentCategory.postList = [
+          ...currentCategory.postList,
+          ...res.data.data
+        ];
+
+        // 这里加载完了文章列表数据, 然后需要手动将当前栏目的加载状态改回 false 也就是没有正在加载
+        // 这样子才能在下次拉到底的时候重新触发加载下一页
+        currentCategory.loading = false;
+
+        // 最后如果发现数据已经到了尽头, 应该告诉组件已经完毕, 禁止再次发送请求
+        // 什么时候我们知道已经加载完了全部数据
+        // 我们设置了每页长度, 正常情况下数据库应该返回对应的数据,
+        // 如果有一次, 返回的数据数量比规定页面长度小, 那么知道数据库已经见底
+        if (res.data.data.length < currentCategory.pageSize) {
+          currentCategory.finished = true;
+        }
       });
     }
   }
