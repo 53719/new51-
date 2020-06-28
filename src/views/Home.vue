@@ -41,7 +41,14 @@ export default {
   },
   watch: {
     activeTab() {
-      this.getPost();
+      // this.getPost();
+       // 之前每次当前激活索引发生改变都会发送请求,
+      // 现在因为每个栏目自己管理文章, 就可以通过判断当前栏目是否有文章
+      // 来确认是否需要发送请求
+      const currentCategory = this.categoriesList[this.activeTab]
+      if (currentCategory.postList.length == 0) {
+        this.getPost()
+      }
     }
   },
 
