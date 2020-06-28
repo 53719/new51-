@@ -2,7 +2,7 @@
   <div>
     <HomeHeader />
 
-    <van-tabs v-model="activeTab">
+    <van-tabs v-model="activeTab" :sticky="sticky">
       <van-tab :title="category.name" v-for="category in categoriesList" :key="category.id">
         <!-- <PostItem :postData="post" v-for="post in category.postList" :key="post.id" /> -->
         <van-list
@@ -40,7 +40,8 @@ export default {
       // 是否在加载
       loading: false,
       // 是否已经全部加载
-      finished: false
+      finished: false,
+      sticky: true
     };
   },
 
@@ -81,7 +82,15 @@ export default {
         const newData = res.data.data.map(category => {
           return {
             ...category,
-            postList: []
+            postList: [],
+            pageIndex: 1,
+            //每页长度
+            pageSize: 5,
+            // 是否在加载
+            loading: false,
+            // 是否已经全部加载
+            finished: false,
+            sticky: true
           };
         });
         this.categoriesList = newData;
