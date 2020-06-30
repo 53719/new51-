@@ -2,7 +2,9 @@
   <div>
     <HomeHeader />
 
-    <van-tabs v-model="activeTab" :sticky="sticky">
+    <!-- sticky 是否使用粘性定位布局 -->
+    <!-- swipeable 是否开启手势滑动切换 -->
+    <van-tabs v-model="activeTab" sticky swipeable>
       <van-tab :title="category.name" v-for="category in categoriesList" :key="category.id">
         <!-- <PostItem :postData="post" v-for="post in category.postList" :key="post.id" /> -->
         <van-list
@@ -41,7 +43,7 @@ export default {
       loading: false,
       // 是否已经全部加载
       finished: false,
-      sticky: true
+      // sticky: true
     };
   },
 
@@ -90,7 +92,7 @@ export default {
             loading: false,
             // 是否已经全部加载
             finished: false,
-            sticky: true
+            // sticky: true
           };
         });
         this.categoriesList = newData;
