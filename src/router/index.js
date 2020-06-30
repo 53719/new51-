@@ -35,7 +35,7 @@ const routes = [
     component: Register
   },
   {
-    path: '/PostDetail/:id',
+    path: '/postdetail/:id',
     name: 'PostDetailPage',
     component: PostDetail
   },
