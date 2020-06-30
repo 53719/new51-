@@ -13,9 +13,16 @@
       <div class="mainContent" v-html="postDetail.content"></div>
     </div>
 
-    <div class="videoWrapper" v-if="postDetail.type == 2">视频</div>
+    <div class="videoWrapper" v-if="postDetail.type == 2">
+      <video
+        class="player"
+        controls
+        poster="https://timgmb04.bdimg.com/timg?searchbox_feed&quality=100&wh_rate=0&size=b576_324&ref=http%3A%2F%2Fwww.baidu.com&sec=1568739067&di=612dd27cae470b93b01a4b32ef72fbac&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Fe18c6ffa079441431f8988ca4c3ac106.jpeg"
+        src="https://video.pearvideo.com/mp4/adshort/20200421/cont-1670293-15098199_adpkg-ad_hd.mp4"
+      ></video>
+    </div>
 
-        <div class="buttonsWrapper">
+    <div class="buttonsWrapper">
       <div class="btn dianzan">
         <span class="iconfont icondianzan"></span> 520
       </div>
@@ -47,7 +54,7 @@ export default {
 <style lang="less" scoped>
 .normalWrapper {
   padding: 0 4.444vw;
-  
+
   .header {
     display: flex;
     align-items: center;
@@ -59,7 +66,7 @@ export default {
       }
     }
     .btnFollow {
-      border:0.278vw solid #bbb;
+      border: 0.278vw solid #bbb;
       padding: 1.111vw 2.778vw;
       font-size: 3.333vw;
       border-radius: 2.778vw;
@@ -77,6 +84,11 @@ export default {
   /deep/ img {
     // 这里用 width 并不严谨
     max-width: 100%;
+  }
+}
+.videoWrapper {
+  .player {
+    width: 100vw;
   }
 }
 .buttonsWrapper {
