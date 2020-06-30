@@ -13,6 +13,8 @@ import follows from '@/views/personal/follows'
 import Test from '@/views/Test'
 //收藏页面
 import Star from '@/views/personal/Star'
+//文章详细页面
+import PostDetail from '@/views/PostDetail'
 
 Vue.use(VueRouter)
 
@@ -32,6 +34,12 @@ const routes = [
     name: 'RegisterPage',
     component: Register
   },
+  {
+    path: '/PostDetail',
+    name: 'PostDetailPage',
+    component: PostDetail
+  },
+  
 
 
   //个人中心
