@@ -32,7 +32,7 @@ export default {
     return {
       activeTab: 0,
       categoriesList: [],
-      postList: [],
+      // postList: [],
       //当前页码
       pageIndex: 1,
       //每页长度

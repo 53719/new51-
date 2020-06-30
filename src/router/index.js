@@ -11,6 +11,8 @@ import EditProfile from '@/views/personal/EditProfile'
 import follows from '@/views/personal/follows'
 //测试页面
 import Test from '@/views/Test'
+//收藏页面
+import Star from '@/views/personal/Star'
 
 Vue.use(VueRouter)
 
@@ -54,11 +56,16 @@ const routes = [
     name: 'followpage',
     component: follows
   },
+  {
+    path: '/star',
+    name: 'starpage',
+    component: Star
+  },
 
   //测试页面
   {
     path: '/test',
-    name:'testPage',
+    name: 'testPage',
     component: Test
   },
 ]
