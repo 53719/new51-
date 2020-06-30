@@ -1,5 +1,5 @@
 <template>
-  <div @click="$router.push('/postdetail')">
+  <div @click="$router.push('/postdetail'+postData.id)">
     <!-- 三种文章类型区分方式, 数据中 type 如果是 1 就是普通文章
         按照 cover 属性的长度, 如果小于三 就显示一张图的格式
         如果大于等于三就显示三张图的格式
