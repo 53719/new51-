@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <span class="iconfont iconjiantou2" @click="$router.push('/personal')"></span>
+    <span class="iconfont iconjiantou2" @click="$router.back()"></span>
     <div class="title">{{titleText}}</div>
   </div>
 </template>
@@ -8,11 +8,6 @@
 <script>
 export default {
   props: ["titleText"],
-  methods: {
-    // backClick() {
-    //   this.$router.replace({ path: "/personal" });
-    // }
-  }
 };
 </script>
 

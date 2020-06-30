@@ -16,7 +16,7 @@
         </div>
         <div class="data">{{userInfo.create_date.split('T')[0]}}</div>
       </div>
-      <span class="iconfont iconjiantou1" @click="token1"></span>
+      <span class="iconfont iconjiantou1" @click="$router.push('/edit')"></span>
     </div>
 
     <div>
@@ -70,9 +70,6 @@ export default {
       //跳转
       this.$router.replace("/login");
     },
-    token1() {
-      this.$router.replace({ path: "/edit" });
-    }
   }
 };
 </script>
