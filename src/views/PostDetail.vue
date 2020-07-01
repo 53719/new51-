@@ -48,14 +48,21 @@
         <span class="iconfont iconweixin"></span> 微信
       </div>
     </div>
+
+     <Comment :commentData="item" v-for="item in commentList" :key="item.id"/>
   </div>
 </template>
 
 <script>
+import Comment from '@/components/comment/index'
 export default {
+      components:{
+        Comment
+    },
   data() {
     return {
-      postDetail: {}
+      postDetail: {},
+      commentList:[]
     };
   },
   created() {
@@ -65,6 +72,15 @@ export default {
       console.log(res.data);
       this.postDetail = res.data.data;
     });
+
+     // 除了文章详情还要获取评论列表
+    this.$axios({
+      url: '/post_comment/' + this.$route.params.id
+    }).then(res=>{
+      console.log(res.data);
+      
+      this.commentList=res.data.data
+    })
   },
   methods: {
     handleFollow() {
