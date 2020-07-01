@@ -34,7 +34,10 @@ export default {
       commentList:[
         // 这里是评论列表, 数组里面每一个对象都是一条评论
         {
-          content:'6666'
+          content:'6666',
+          parent: {
+            content: '你家有几套房啊?'
+          }
         },
         {
           content:'牛皮'
@@ -45,6 +48,18 @@ export default {
         {
           content:'一giao我里giao giao'
         },
+        {
+          content: '你家有几套房啊?'
+        },
+        {
+          content: '从前有座山'
+        },
+        {
+          content: '山上有座庙',
+          parent: {
+            content: '从前有座山'
+          },
+        }
       ]
     }
   },
