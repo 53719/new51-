@@ -15,6 +15,8 @@ import Test from '@/views/Test'
 import Star from '@/views/personal/Star'
 //文章详细页面
 import PostDetail from '@/views/PostDetail'
+// 更多跟帖页
+import MoreComment from '@/views/MoreComment'
 
 Vue.use(VueRouter)
 
@@ -39,7 +41,11 @@ const routes = [
     name: 'PostDetailPage',
     component: PostDetail
   },
-  
+  {
+    path: '/morecomment/:id',
+    name: 'moreCommentPage',
+    component: MoreComment
+  },
 
 
   //个人中心

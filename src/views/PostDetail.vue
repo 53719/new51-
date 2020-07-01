@@ -52,7 +52,7 @@
     <Comment :commentData="item" v-for="item in commentList" :key="item.id" />
 
     <div class="MoreCoomment">
-      <div class="btn">更多跟帖</div>
+      <div class="btn" @click="$router.push('/morecomment/'+ $route.params.id)">更多跟帖</div>
     </div>
   </div>
 </template>
@@ -137,33 +137,33 @@ export default {
 
 <style lang="less" scoped>
 .normalWrapper {
-  padding: 0 15.998px;
+  padding: 0 4.444vw;
 
   .header {
     display: flex;
     align-items: center;
     .logoWrapper {
       flex: 1;
-      padding-left: 10.001px;
+      padding-left: 2.778vw;
       .iconnew {
-        font-size: 54px;
+        font-size: 15vw;
       }
     }
     .btnFollow {
-      border: 1.001px solid #bbb;
-      padding: 4px 10.001px;
-      font-size: 11.999px;
-      border-radius: 10.001px;
+      border: 0.278vw solid #bbb;
+      padding: 1.111vw 2.778vw;
+      font-size: 3.333vw;
+      border-radius: 2.778vw;
     }
   }
   .title {
-    font-size: 15.998px;
+    font-size: 4.444vw;
     font-weight: bold;
   }
   .info {
-    font-size: 14px;
+    font-size: 3.889vw;
     color: #aaa;
-    padding: 6.001px 0 15.998px;
+    padding: 1.667vw 0 4.444vw;
   }
   /deep/ img {
     // 这里用 width 并不严谨
@@ -172,24 +172,24 @@ export default {
 }
 .videoWrapper {
   .player {
-    width: 360px;
+    width: 100vw;
   }
   .info {
-    padding: 3.889vw 4.444vw;
+    padding: 14px 15.998px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 3.889vw;
+    font-size: 14px;
     .user {
       display: flex;
       align-items: center;
       color: #888;
     }
     .btnFollow {
-      border: 0.278vw solid #bbb;
-      padding: 1.111vw 2.778vw;
-      font-size: 3.333vw;
-      border-radius: 2.778vw;
+      border: 1.001px solid #bbb;
+      padding: 4px 10.001px;
+      font-size: 11.999px;
+      border-radius: 10.001px;
       &.highlight {
         background: red;
         border-color: red;
@@ -197,31 +197,31 @@ export default {
       }
     }
     img {
-      width: 7.222vw;
-      height: 7.222vw;
+      width: 25.999px;
+      height: 25.999px;
       object-fit: cover;
       border-radius: 50%;
-      margin-right: 1.667vw;
+      margin-right: 6.001px;
     }
   }
   .title {
-    padding: 0 4.444vw;
-    font-size: 4.444vw;
+    padding: 0 15.998px;
+    font-size: 15.998px;
     color: #333;
   }
 }
 .buttonsWrapper {
   display: flex;
   justify-content: space-around;
-  padding: 40px 0 100.001px;
-  border-bottom: 4px solid #e4e4e4;
+  padding: 11.111vw 0 27.778vw;
+  border-bottom: 1.111vw solid #e4e4e4;
   .btn {
-    border: 1.001px solid #888;
-    font-size: 14px;
-    line-height: 29.999px;
-    height: 29.999px;
-    padding: 0 15.998px;
-    border-radius: 15.998px;
+    border: 0.278vw solid #888;
+    font-size: 3.889vw;
+    line-height: 8.333vw;
+    height: 8.333vw;
+    padding: 0 4.444vw;
+    border-radius: 4.444vw;
     .iconweixin {
       color: #00c800;
     }
@@ -229,18 +229,19 @@ export default {
 }
 
 .MoreCoomment {
-  height: 90px;
+  height: 25vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 11.111vw;
   .btn {
-    font-size: 14px;
+    font-size: 3.889vw;
     color: #666;
-    padding: 0 20px;
-    height: 32px;
-    line-height: 32px;
-    border: 1px solid #888;
-    border-radius: 16px;
+    padding: 0 5.556vw;
+    height: 8.889vw;
+    line-height: 8.889vw;
+    border: 0.278vw solid #888;
+    border-radius: 4.444vw;
   }
 }
 </style>
