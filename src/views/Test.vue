@@ -12,11 +12,20 @@
     <button @click="addStar(3)">添加收藏3</button>
     <button @click="addStar(4)">添加收藏4</button>
     <button @click="addStar(5)">添加收藏5</button>
+
+    <Digui num='10'/>
   </div>
+  
 </template>
 
 <script>
+import Digui from  "@/components/Digui"
 export default {
+  components:{
+    Digui
+  },
+
+
   methods: {
     addFollow(id) {
       this.$axios({
