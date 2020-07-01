@@ -13,16 +13,40 @@
     <button @click="addStar(4)">添加收藏4</button>
     <button @click="addStar(5)">添加收藏5</button>
 
-    <Digui num='10'/>
+    <br>
+    <br>
+    <br>
+    <br>
+     <!-- 遍历评论列表用评论子组件渲染每条评论 -->
+    <Comment :commentData="comment" v-for="(comment,index) in commentList" :key="index"/>
   </div>
   
 </template>
 
 <script>
-import Digui from  "@/components/Digui"
+import Comment from '@/components/comment/index'
 export default {
   components:{
-    Digui
+    Comment
+  },
+  data () {
+    return {
+      commentList:[
+        // 这里是评论列表, 数组里面每一个对象都是一条评论
+        {
+          content:'6666'
+        },
+        {
+          content:'牛皮'
+        },
+        {
+          content:'火钳刘明'
+        },
+        {
+          content:'一giao我里giao giao'
+        },
+      ]
+    }
   },
 
 
