@@ -49,20 +49,24 @@
       </div>
     </div>
 
-     <Comment :commentData="item" v-for="item in commentList" :key="item.id"/>
+    <Comment :commentData="item" v-for="item in commentList" :key="item.id" />
+
+    <div class="MoreCoomment">
+      <div class="btn">更多跟帖</div>
+    </div>
   </div>
 </template>
 
 <script>
-import Comment from '@/components/comment/index'
+import Comment from "@/components/comment/index";
 export default {
-      components:{
-        Comment
-    },
+  components: {
+    Comment
+  },
   data() {
     return {
       postDetail: {},
-      commentList:[]
+      commentList: []
     };
   },
   created() {
@@ -73,18 +77,18 @@ export default {
       this.postDetail = res.data.data;
     });
 
-     // 除了文章详情还要获取评论列表
+    // 除了文章详情还要获取评论列表
     this.$axios({
-      url: '/post_comment/' + this.$route.params.id
-    }).then(res=>{
+      url: "/post_comment/" + this.$route.params.id
+    }).then(res => {
       console.log(res.data);
-      
+
       //  对于评论数组进行改造只剩下三条
       const commentList = res.data.data;
       commentList.length = 3;
 
-      this.commentList = commentList
-    })
+      this.commentList = commentList;
+    });
   },
   methods: {
     handleFollow() {
@@ -221,6 +225,22 @@ export default {
     .iconweixin {
       color: #00c800;
     }
+  }
+}
+
+.MoreCoomment {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    font-size: 14px;
+    color: #666;
+    padding: 0 20px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #888;
+    border-radius: 16px;
   }
 }
 </style>
