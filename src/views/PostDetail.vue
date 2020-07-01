@@ -79,7 +79,11 @@ export default {
     }).then(res=>{
       console.log(res.data);
       
-      this.commentList=res.data.data
+      //  对于评论数组进行改造只剩下三条
+      const commentList = res.data.data;
+      commentList.length = 3;
+
+      this.commentList = commentList
     })
   },
   methods: {
