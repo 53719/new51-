@@ -34,30 +34,60 @@ export default {
       commentList:[
         // 这里是评论列表, 数组里面每一个对象都是一条评论
         {
-          content:'6666',
-          parent: {
-            content: '你家有几套房啊?'
-          }
-        },
-        {
-          content:'牛皮'
-        },
-        {
-          content:'火钳刘明'
-        },
-        {
-          content:'一giao我里giao giao'
-        },
-        {
-          content: '你家有几套房啊?'
-        },
-        {
           content: '从前有座山'
         },
+
+        {
+          content: '火钳刘明'
+        },
+
+        {
+          content: '666'
+        },
+        
         {
           content: '山上有座庙',
           parent: {
             content: '从前有座山'
+          },
+        },
+
+        {
+          content: '庙里有个和尚',
+          parent: {
+            content: '山上有座庙',
+            parent: {
+              content: '从前有座山'
+            },
+          },
+        },
+
+        {
+          content: '火钳刘明'
+        },
+
+        {
+          content: '666'
+        },
+
+        {
+          content: '火钳刘明'
+        },
+
+        {
+          content: '666'
+        },
+
+        {
+          content: '和尚正在讲故事',
+          parent: {
+            content: '庙里有个和尚',
+            parent: {
+              content: '山上有座庙',
+              parent: {
+                content: '从前有座山'
+              },
+            },
           },
         }
       ]
