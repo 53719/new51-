@@ -14,7 +14,7 @@
           <span class="iconfont iconxingbienv" v-else></span>
           {{userInfo.nickname}}
         </div>
-        <div class="data">{{userInfo.create_date.split('T')[0]}}</div>
+        <div class="data">{{createDate}}</div>
       </div>
       <span class="iconfont iconjiantou1" @click="$router.push('/edit')"></span>
     </div>
@@ -41,6 +41,15 @@ export default {
   components: {
     NavBar,
     AuthBtn
+  },
+  computed: {
+    createDate() {
+      if (this.userInfo.create_date) {
+        return this.userInfo.create_date.split('T')[0]
+      }else {
+        return '2020-10-01'
+      }
+    }
   },
   mounted() {
     this.$axios({
