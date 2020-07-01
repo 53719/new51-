@@ -7,7 +7,7 @@
     <div class="singleImg" v-if="postData.type == 1 && postData.cover.length >=1 && postData.cover.length < 3">
       <div class="left">
         <div class="title">{{postData.title}}</div>
-        <div class="info">{{postData.user.nickname}} {{postData.comment_length}}跟帖</div>
+        <div class="info">{{postData.user.nickname}} {{commentLength}}跟帖</div>
       </div>
       <img :src="postData.cover[0].url | fixImgUrl" alt class="right" />
     </div>
@@ -19,7 +19,7 @@
         <img :src="postData.cover[1].url | fixImgUrl" alt />
         <img :src="postData.cover[2].url | fixImgUrl" alt />
       </div>
-      <div class="info">{{postData.user.nickname}} {{postData.comment_length}}跟帖</div>
+      <div class="info">{{postData.user.nickname}} {{commentLength}}跟帖</div>
     </div>
 
     <div class="video" v-if="postData.type == 2  && postData.cover.length>=1">
@@ -29,7 +29,7 @@
                 <div class="iconfont iconshipin"></div>
             </div>
             <div class="info">
-                {{postData.user.nickname}} {{postData.comment_length}}跟帖
+                {{postData.user.nickname}} {{commentLength}}跟帖
             </div>
     </div>
   </div>
@@ -37,7 +37,18 @@
 
 <script>
 export default {
-  props: ["postData"]
+  props: ["postData"],
+   computed: {
+        commentLength() {
+            if (this.postData.comments) {
+                return this.postData.comments.length
+            }else if (this.postData.comment_length) {
+                return this.postData.comment_length
+            }else {
+                return 0
+            }
+        }
+    }
 };
 </script>
 
