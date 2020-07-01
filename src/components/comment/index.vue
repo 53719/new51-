@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="commentData">
     <div class="mainComment">
       <div class="info">
         <img src="@/assets/logo.png" alt />

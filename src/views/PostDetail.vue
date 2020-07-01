@@ -49,10 +49,14 @@
       </div>
     </div>
 
-    <Comment :commentData="item" v-for="item in commentList" :key="item.id" />
+    <Comment :commentData="item" v-for="(item,index) in commentList" :key="index" />
 
     <div class="MoreCoomment">
-      <div class="btn" @click="$router.push('/morecomment/'+ $route.params.id)">更多跟帖</div>
+      <div
+        class="btn"
+        @click="$router.push('/morecomment/'+ $route.params.id)"
+        v-if=" postDetail.comment_length>3"
+      >更多跟帖</div>
     </div>
   </div>
 </template>
