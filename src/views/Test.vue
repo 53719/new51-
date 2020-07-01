@@ -44,7 +44,19 @@ export default {
         {
           content: '666'
         },
-        
+                {
+          content: '666',
+          parent: {
+            content: '你家几套房啊',
+            parent: {
+              content: '你男友家庭怎么样啊?',
+              parent: {
+                content: '咱们女儿谈对象了'
+              }
+            }
+          }
+        },
+
         {
           content: '山上有座庙',
           parent: {
