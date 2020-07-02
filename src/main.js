@@ -40,8 +40,8 @@ axios.interceptors.response.use(res=>{
   
   // 对获取的数据进行处理
   const {statusCode, message} = res.data
-  console.log(statusCode);
-  console.log(message);
+  // console.log(statusCode);
+  // console.log(message);
   
   if (message=='用户信息验证失败') {
     // 处理错误，在入口文件如果想要使用 vant ui 弹出窗口、

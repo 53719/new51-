@@ -58,14 +58,18 @@
         v-if=" postDetail.comment_length>3"
       >更多跟帖</div>
     </div>
+
+    <CommentInput />
   </div>
 </template>
 
 <script>
 import Comment from "@/components/comment/index";
+import CommentInput from  "@/components/CommentInput"
 export default {
   components: {
-    Comment
+    Comment,
+    CommentInput
   },
   data() {
     return {
