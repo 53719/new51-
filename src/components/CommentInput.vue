@@ -1,11 +1,12 @@
 <template>
   <div class="commentWrapper">
     <div class="enable" v-if="isShowTextarea">
-      <textarea rows="3" ref="textarea" @blur="isShowTextarea = false"></textarea>
-      <div class="btnSend">发送</div>
+      <textarea rows="3" ref="textarea" @blur="hideTextarea" v-model="content"></textarea>
+      <div class="btnSend" @click="send">发送</div>
     </div>
+
     <div class="disable" v-if="!isShowTextarea">
-      <input type="text" @focus="showTextarea" />
+      <input type="text" @focus="showTextarea" :value="content" />
       <div class="pinglunWrapper">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">520</div>
@@ -18,20 +19,37 @@
 
 <script>
 export default {
-    data () {
-        return {
-            isShowTextarea:false
-        }
+  data() {
+    return {
+      isShowTextarea: false,
+      content: ''
+    };
+  },
+  methods: {
+    showTextarea() {
+      // 1. 将数据改为 true 让输入框弹出
+      this.isShowTextarea = true;
+      this.$nextTick(() => {
+        this.$refs.textarea.focus();
+      });
     },
-    methods:{
-        showTextarea(){
-            // 1. 将数据改为 true 让输入框弹出
-            this.isShowTextarea=true;
-            this.$nextTick(()=>{
-                this.$refs.textarea.focus()
-            })
-        }
+    hideTextarea(){
+        setTimeout(()=>{
+             this.isShowTextarea = false
+        },50)
+    },
+    send(){
+        console.log(this.$route.params.id);
+        console.log(this.content);
+        
+        this.$axios({
+            url:'/post_comment/'+this.$route.params.id
+        }).then(res=>{
+            console.log(res.data);
+            
+        })
     }
+  }
 };
 </script>
 
