@@ -42,6 +42,7 @@ ol {
   width: 100vw;
   height: 13.333vw;
   background-color: #000;
+  opacity: 0.5;
   z-index: 999;
   .iconnew {
     float: left;
