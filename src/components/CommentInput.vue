@@ -25,6 +25,9 @@ export default {
       content: ''
     };
   },
+  props:['parentId']
+  ,
+
   methods: {
     showTextarea() {
       // 1. 将数据改为 true 让输入框弹出
@@ -39,15 +42,22 @@ export default {
         },50)
     },
     send(){
-        // console.log(this.$route.params.id);
-        // console.log(this.content);
+        console.log(this.$route.params.id);
+        console.log(this.content);
         
+        // 现在我们可能有 parentId 也可能没有
+        // data 不能直接写死
+        let data={
+            content: this.content
+        }
+        if(this.parentId){
+            data.parent_id=this.parentId
+        }
+
         this.$axios({
             url: "/post_comment/"+this.$route.params.id,
             method:'post',
-             data: {
-                    content: this.content
-                }
+             data
         }).then(res=>{
             console.log(res.data);
             if(res.data.message=='评论发布成功'){
@@ -62,42 +72,42 @@ export default {
 <style lang="less" scoped>
 .commentWrapper {
   position: fixed;
-  bottom: 13.889vw;
+  bottom: 50px;
   left: 0;
   background: #f2f2f2;
   width: 100%;
-  padding: 2.778vw;
+  padding: 10.001px;
   box-sizing: border-box;
   .disable {
     display: flex;
     justify-content: space-between;
     input {
-      width: 50vw;
-      height: 8.333vw;
-      line-height: 8.333vw;
+      width: 180px;
+      height: 29.999px;
+      line-height: 29.999px;
       background-color: #d7d7d7;
       border: none;
       outline: none;
-      border-radius: 4.167vw;
-      padding: 0 4.167vw;
+      border-radius: 15.001px;
+      padding: 0 15.001px;
       box-sizing: border-box;
     }
     .iconfont {
-      font-size: 22px;
+      font-size: 6.111vw;
     }
     .pinglunWrapper {
       position: relative;
       .num {
         position: absolute;
-        font-size: 3.333vw;
+        font-size: 11.999px;
         background: red;
         color: white;
-        line-height: 3.889vw;
-        height: 3.889vw;
-        border-radius: 1.944vw;
-        padding: 0 1.111vw;
-        top: -1.389vw;
-        left: 1.667vw;
+        line-height: 14px;
+        height: 14px;
+        border-radius: 6.998px;
+        padding: 0 4px;
+        top: -5px;
+        left: 6.001px;
       }
     }
   }
@@ -109,19 +119,19 @@ export default {
       background-color: #d7d7d7;
       border: none;
       outline: none;
-      border-radius: 10px;
-      padding: 12px;
+      border-radius: 2.778vw;
+      padding: 3.333vw;
       resize: none;
     }
     .btnSend {
-      height: 26px;
-      line-height: 26px;
-      font-size: 12px;
-      border-radius: 13px;
-      padding: 0 16px;
+      height: 7.222vw;
+      line-height: 7.222vw;
+      font-size: 3.333vw;
+      border-radius: 3.611vw;
+      padding: 0 4.444vw;
       color: white;
       background: red;
-      margin: 0 10px;
+      margin: 6.944vw 2.778vw;
     }
   }
 }

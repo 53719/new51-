@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <Comment :commentData="item" v-for="(item,index) in commentList" :key="index" />
+    <Comment @callReply="callReply" :commentData="item" v-for="(item,index) in commentList" :key="index" />
 
     <div class="MoreCoomment">
       <div
@@ -59,7 +59,7 @@
       >更多跟帖</div>
     </div>
 
-    <CommentInput />
+    <CommentInput ref="commentInput" :parentId="commentId"/>
   </div>
 </template>
 
@@ -74,7 +74,8 @@ export default {
   data() {
     return {
       postDetail: {},
-      commentList: []
+      commentList: [],
+      commentId:''
     };
   },
   created() {
@@ -140,6 +141,13 @@ export default {
           this.postDetail.like_length -= 1;
         }
       });
+    },
+    callReply(commentId){
+       // 1. 将 id 存起来交给 输入框组件
+      this.commentId = commentId;
+      console.log('获取到了该回复的 parentid');
+      // 2. 调起输入框, 输入框是 CommentInput 子组件的 showTextarea 函数
+      this.$refs.commentInput.showTextarea()
     }
   }
 };

@@ -7,7 +7,7 @@
           <div class="name">{{commentData.user.nickname}}</div>
           <div class="time">2小时</div>
         </div>
-        <div class="btnReply">回复</div>
+        <div class="btnReply" @click="callReply">回复</div>
       </div>
 
       <Parent :parentData="commentData.parent" v-if="commentData.parent" />
@@ -23,6 +23,11 @@ export default {
   props: ["commentData"],
   components: {
     Parent
+  },
+  methods:{
+    callReply(){
+      this.$emit('callReply',this.commentData.id)
+    }
   }
 };
 </script>
