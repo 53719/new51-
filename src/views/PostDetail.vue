@@ -99,6 +99,8 @@ export default {
       }
 
       this.commentList = commentList;
+      // 优化二. 回复完别人之后, 默认将被回复人的数据清空
+        this.commentInfo = {}
     });
   },
   methods: {

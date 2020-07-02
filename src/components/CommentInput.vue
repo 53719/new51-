@@ -1,23 +1,18 @@
 <template>
   <div class="commentWrapper">
     <div class="enable" v-if="isShowTextarea">
-      <textarea 
-      rows="3"
-       ref="textarea"
-        @blur="hideTextarea" 
+      <textarea
+        rows="3"
+        ref="textarea"
+        @blur="hideTextarea"
         v-model="content"
         :placeholder="placeholderText"
-        ></textarea>
+      ></textarea>
       <div class="btnSend" @click="send">发送</div>
     </div>
 
     <div class="disable" v-if="!isShowTextarea">
-      <input 
-      type="text"
-       @focus="showTextarea" 
-       :value="content"
-       :placeholder="placeholderText"
-        />
+      <input type="text" @focus="showTextarea" :value="content" :placeholder="placeholderText" />
       <div class="pinglunWrapper">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">520</div>
@@ -33,18 +28,18 @@ export default {
   data() {
     return {
       isShowTextarea: false,
-      content: ''
+      content: ""
     };
   },
-  props:['parentInfo'],
-  computed:{
-      placeholderText(){
-          if(this.parentInfo.nickname){
-              return '回复@'+this.parentInfo.nickname
-          }else{
-              return '写评论'
-          }
+  props: ["parentInfo"],
+  computed: {
+    placeholderText() {
+      if (this.parentInfo.nickname) {
+        return "回复@" + this.parentInfo.nickname;
+      } else {
+        return "写评论";
       }
+    }
   },
   methods: {
     showTextarea() {
@@ -54,34 +49,36 @@ export default {
         this.$refs.textarea.focus();
       });
     },
-    hideTextarea(){
-        setTimeout(()=>{
-             this.isShowTextarea = false
-        },50)
+    hideTextarea() {
+      setTimeout(() => {
+        this.isShowTextarea = false;
+      }, 50);
     },
-    send(){
-        console.log(this.$route.params.id);
-        console.log(this.content);
-        
-        // 现在我们可能有 parentId 也可能没有
-        // data 不能直接写死
-        let data={
-            content: this.content
-        }
-        if(this.parentInfo.id){
-            data.parent_id=this.parentInfo.id
-        }
+    send() {
+      console.log(this.$route.params.id);
+      console.log(this.content);
 
-        this.$axios({
-            url: "/post_comment/"+this.$route.params.id,
-            method:'post',
-             data
-        }).then(res=>{
-            console.log(res.data);
-            if(res.data.message=='评论发布成功'){
-                this.content=''
-            }
-        })
+      // 现在我们可能有 parentId 也可能没有
+      // data 不能直接写死
+      let data = {
+        content: this.content
+      };
+      if (this.parentInfo.id) {
+        data.parent_id = this.parentInfo.id;
+      }
+
+      this.$axios({
+        url: "/post_comment/" + this.$route.params.id,
+        method: "post",
+        data
+      }).then(res => {
+        console.log(res.data);
+        if (res.data.message == "评论发布成功") {
+          // 优化1. 提醒父页面更新评论数据
+          this.$emit("reloadComment");
+          this.content = "";
+        }
+      });
     }
   }
 };
