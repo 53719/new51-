@@ -65,7 +65,7 @@
 
 <script>
 import Comment from "@/components/comment/index";
-import CommentInput from  "@/components/CommentInput"
+import CommentInput from "@/components/CommentInput";
 export default {
   components: {
     Comment,
@@ -93,7 +93,9 @@ export default {
 
       //  对于评论数组进行改造只剩下三条
       const commentList = res.data.data;
-      commentList.length = 3;
+      if (commentList.length > 3) {
+        commentList.length = 3;
+      }
 
       this.commentList = commentList;
     });

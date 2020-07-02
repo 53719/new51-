@@ -39,14 +39,20 @@ export default {
         },50)
     },
     send(){
-        console.log(this.$route.params.id);
-        console.log(this.content);
+        // console.log(this.$route.params.id);
+        // console.log(this.content);
         
         this.$axios({
-            url:'/post_comment/'+this.$route.params.id
+            url: "/post_comment/"+this.$route.params.id,
+            method:'post',
+             data: {
+                    content: this.content
+                }
         }).then(res=>{
             console.log(res.data);
-            
+            if(res.data.message=='评论发布成功'){
+                this.content=''
+            }
         })
     }
   }
