@@ -24,9 +24,12 @@ export default {
   components: {
     Parent
   },
-  methods:{
-    callReply(){
-      this.$emit('callReply',this.commentData.id)
+  methods: {
+    callReply() {
+      this.$emit("callReply", {
+        id: this.commentData.id,
+        nickname: this.commentData.user.nickname
+      });
     }
   }
 };

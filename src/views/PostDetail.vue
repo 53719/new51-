@@ -59,7 +59,7 @@
       >更多跟帖</div>
     </div>
 
-    <CommentInput ref="commentInput" :parentId="commentId"/>
+    <CommentInput ref="commentInput" :parentInfo="commentInfo"/>
   </div>
 </template>
 
@@ -75,7 +75,7 @@ export default {
     return {
       postDetail: {},
       commentList: [],
-      commentId:''
+      commentInfo:{}
     };
   },
   created() {
@@ -142,9 +142,9 @@ export default {
         }
       });
     },
-    callReply(commentId){
+    callReply(commentInfo){
        // 1. 将 id 存起来交给 输入框组件
-      this.commentId = commentId;
+      this.commentInfo = commentInfo;
       console.log('获取到了该回复的 parentid');
       // 2. 调起输入框, 输入框是 CommentInput 子组件的 showTextarea 函数
       this.$refs.commentInput.showTextarea()

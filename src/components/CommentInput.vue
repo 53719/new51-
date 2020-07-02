@@ -1,12 +1,23 @@
 <template>
   <div class="commentWrapper">
     <div class="enable" v-if="isShowTextarea">
-      <textarea rows="3" ref="textarea" @blur="hideTextarea" v-model="content"></textarea>
+      <textarea 
+      rows="3"
+       ref="textarea"
+        @blur="hideTextarea" 
+        v-model="content"
+        :placeholder="placeholderText"
+        ></textarea>
       <div class="btnSend" @click="send">发送</div>
     </div>
 
     <div class="disable" v-if="!isShowTextarea">
-      <input type="text" @focus="showTextarea" :value="content" />
+      <input 
+      type="text"
+       @focus="showTextarea" 
+       :value="content"
+       :placeholder="placeholderText"
+        />
       <div class="pinglunWrapper">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">520</div>
@@ -25,9 +36,16 @@ export default {
       content: ''
     };
   },
-  props:['parentId']
-  ,
-
+  props:['parentInfo'],
+  computed:{
+      placeholderText(){
+          if(this.parentInfo.nickname){
+              return '回复@'+this.parentInfo.nickname
+          }else{
+              return '写评论'
+          }
+      }
+  },
   methods: {
     showTextarea() {
       // 1. 将数据改为 true 让输入框弹出
@@ -50,8 +68,8 @@ export default {
         let data={
             content: this.content
         }
-        if(this.parentId){
-            data.parent_id=this.parentId
+        if(this.parentInfo.id){
+            data.parent_id=this.parentInfo.id
         }
 
         this.$axios({
