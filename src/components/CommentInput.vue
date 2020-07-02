@@ -1,11 +1,11 @@
 <template>
   <div class="commentWrapper">
-    <div class="enable" v-if="false">
-      <textarea rows="3"></textarea>
+    <div class="enable" v-if="isShowTextarea">
+      <textarea rows="3" ref="textarea" @blur="isShowTextarea = false"></textarea>
       <div class="btnSend">发送</div>
     </div>
-    <div class="disable">
-      <input type="text" name id />
+    <div class="disable" v-if="!isShowTextarea">
+      <input type="text" @focus="showTextarea" />
       <div class="pinglunWrapper">
         <span class="iconfont iconpinglun-"></span>
         <div class="num">520</div>
@@ -17,7 +17,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data () {
+        return {
+            isShowTextarea:false
+        }
+    },
+    methods:{
+        showTextarea(){
+            // 1. 将数据改为 true 让输入框弹出
+            this.isShowTextarea=true;
+            this.$nextTick(()=>{
+                this.$refs.textarea.focus()
+            })
+        }
+    }
+};
 </script>
 
 <style lang="less" scoped>
@@ -35,7 +50,7 @@ export default {};
     input {
       width: 50vw;
       height: 8.333vw;
-      line-height: 30;
+      line-height: 8.333vw;
       background-color: #d7d7d7;
       border: none;
       outline: none;
@@ -62,27 +77,28 @@ export default {};
       }
     }
   }
-     .enable {
-        display: flex;
-        align-items: flex-end;
-        textarea {
-            flex:1;
-            background-color: #d7d7d7;
-            border: none;
-            outline: none;
-            border-radius: 10px;
-            padding: 12px;
-        }
-        .btnSend {
-            height: 26px;
-            line-height: 26px;
-            font-size: 12px;
-            border-radius: 13px;
-            padding: 0 16px;
-            color: white;
-            background: red;
-            margin: 0 10px;
-        }
+  .enable {
+    display: flex;
+    align-items: flex-end;
+    textarea {
+      flex: 1;
+      background-color: #d7d7d7;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      padding: 12px;
+      resize: none;
     }
+    .btnSend {
+      height: 26px;
+      line-height: 26px;
+      font-size: 12px;
+      border-radius: 13px;
+      padding: 0 16px;
+      color: white;
+      background: red;
+      margin: 0 10px;
+    }
+  }
 }
 </style>
