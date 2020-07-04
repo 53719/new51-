@@ -1,7 +1,7 @@
 <template>
   <div class="headerWrapper">
       <span class="iconfont iconnew"></span>
-      <div class="search">
+      <div class="search" @click="$router.push('/Search')">
           <span class="iconfont iconsearch"></span>
           搜索新闻
       </div>
