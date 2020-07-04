@@ -12,30 +12,15 @@
     <div class="suggestions" v-if="results.length == 0">
       <h2 class="title">历史搜索</h2>
       <div class="history list">
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
+       <div @click="sendSuggestion(item)" class="item" v-for="(item,index) of history" :key="index">
+           {{item}}
+       </div>
       </div>
       <h2 class="title">热门搜索</h2>
       <div class="hot list">
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
-        <div class="item">美女</div>
-        <div class="item">关晓彤</div>
-        <div class="item">英语</div>
+           <div @click="sendSuggestion(item)" class="item" v-for="(item,index) of hot" :key="index">
+           {{item}}
+       </div>
       </div>
     </div>
 
@@ -54,7 +39,13 @@ export default {
   data() {
     return {
       keyword: "",
-      results: []
+      results: [],
+      history:[
+          '美女','关晓彤','华为'
+      ],
+      hot:[
+          '美女','阿信','华为'
+      ]
     };
   },
   methods: {
@@ -74,7 +65,11 @@ export default {
                 // 其实就是一个文章数组
                 // 存放到 data
               this.results=res.data.data
-          })
+          });
+      },
+      sendSuggestion(item){
+          this.keyword=item,
+          this.search()
       }
   }
 };
