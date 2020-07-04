@@ -253,7 +253,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 11.111vw;
+  margin-bottom: 22.111vw;
   .btn {
     font-size: 3.889vw;
     color: #666;

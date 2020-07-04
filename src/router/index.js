@@ -17,6 +17,8 @@ import Star from '@/views/personal/Star'
 import PostDetail from '@/views/PostDetail'
 // 更多跟帖页
 import MoreComment from '@/views/MoreComment'
+//搜索页面
+import Search from '@/views/Search'
 
 Vue.use(VueRouter)
 
@@ -45,6 +47,11 @@ const routes = [
     path: '/morecomment/:id',
     name: 'moreCommentPage',
     component: MoreComment
+  },
+  {
+    path: '/Search',
+    name: 'SearchPage',
+    component: Search
   },
 
 

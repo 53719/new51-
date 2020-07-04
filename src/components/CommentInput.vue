@@ -58,7 +58,7 @@ export default {
       console.log(this.$route.params.id);
       console.log(this.content);
 
-      // 现在我们可能有 parentId 也可能没有
+      // 现在我们可能有 parentInfo.id 也可能没有
       // data 不能直接写死
       let data = {
         content: this.content

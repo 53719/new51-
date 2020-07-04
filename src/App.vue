@@ -41,7 +41,7 @@ ol {
   left: 0;
   width: 100vw;
   height: 13.333vw;
-  background-color: #000;
+  background-color: #f2f2f2;
   opacity: 0.5;
   z-index: 999;
   .iconnew {
@@ -50,7 +50,7 @@ ol {
     text-align: center;
     line-height: 13.333vw;
     font-size: 25vw;
-    color: #fff;
+    color: red;
     border-right: 1px solid #fff;
   }
   .iconwode {
@@ -59,7 +59,7 @@ ol {
     text-align: center;
     line-height: 13.333vw;
     font-size: 9.722vw;
-    color: #fff;
+    color: red;
     border-right: 1px solid #fff;
   }
 }
