@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="topsearch">
-      <span class="iconfont iconjiantou2" @click="$router.back()"></span>
+      <span class="iconfont iconjiantou2" @click="goBack"></span>
       <div class="searchBox">
         <span class="iconfont iconsearch"></span>
         <input type="text" v-model="keyword" placeholder="请输入关键字" />
@@ -48,6 +48,13 @@ export default {
       ]
     };
   },
+  watch:{
+      keyword(newVal){
+          if(!newVal){
+              this.results=[]
+          }
+      }
+  },
   methods: {
       search(){
           // 1 拿到当前的输入关键字, 发送请求  没有拿到数据就返回
@@ -70,6 +77,16 @@ export default {
       sendSuggestion(item){
           this.keyword=item,
           this.search()
+      },
+      goBack(){
+          if(this.results.length==0){
+              //如果本来就是没有结果,才返回上一页
+              this.$route.back()
+          }else{
+               // 如果已经有搜索结果就应该只是清空结果
+                // 还是留在搜索页
+                this.keyword = ''
+          }
       }
   }
 };
