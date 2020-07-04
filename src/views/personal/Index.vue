@@ -23,7 +23,8 @@
       <NavBar LabelText="我的关注" descText="关注的用户" @barClick="$router.push('/follows')" />
       <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="$router.push('/mycomments')" />
       <NavBar LabelText="我的收藏" descText="文章/视频" @barClick="$router.push('/star')" />
-      <NavBar LabelText="设置" descText @barClick="handleBar('设置')" />
+      <NavBar LabelText="栏目管理" descText="激活 / 禁用" @barClick="$router.push('/manage')" />
+      <NavBar LabelText="设置" descText @barClick="$router.push('/edit')" />
     </div>
     <AuthBtn btnText="注销/退出" @clicked="logout()" />
   </div>
@@ -45,9 +46,9 @@ export default {
   computed: {
     createDate() {
       if (this.userInfo.create_date) {
-        return this.userInfo.create_date.split('T')[0]
-      }else {
-        return '2020-10-01'
+        return this.userInfo.create_date.split("T")[0];
+      } else {
+        return "2020-10-01";
       }
     }
   },
@@ -69,16 +70,13 @@ export default {
   },
 
   methods: {
-    handleBar(pagename) {
-      console.log(pagename);
-    },
     logout() {
       //清理数据
       localStorage.removeItem("userId");
       localStorage.removeItem("token");
       //跳转
       this.$router.replace("/login");
-    },
+    }
   }
 };
 </script>

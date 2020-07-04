@@ -21,6 +21,8 @@ import MoreComment from '@/views/MoreComment'
 import Search from '@/views/Search'
 //我的跟帖页面
 import MyComments from '@/views/personal/MyComments'
+//栏目管理页面
+import ManageCategory from '@/views/personal/ManageCategory'
 
 Vue.use(VueRouter)
 
@@ -88,6 +90,11 @@ const routes = [
     path: '/mycomments',
     name: 'mycommentspage',
     component:MyComments
+  },
+  {
+    path: '/manage',
+    name: 'manageCategoryPage',
+    component: ManageCategory
   },
 
   //测试页面
