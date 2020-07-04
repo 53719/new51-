@@ -19,6 +19,8 @@ import PostDetail from '@/views/PostDetail'
 import MoreComment from '@/views/MoreComment'
 //搜索页面
 import Search from '@/views/Search'
+//我的跟帖页面
+import MyComments from '@/views/personal/MyComments'
 
 Vue.use(VueRouter)
 
@@ -81,6 +83,11 @@ const routes = [
     path: '/star',
     name: 'starpage',
     component: Star
+  },
+  {
+    path: '/mycomments',
+    name: 'mycommentspage',
+    component:MyComments
   },
 
   //测试页面

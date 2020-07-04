@@ -21,7 +21,7 @@
 
     <div>
       <NavBar LabelText="我的关注" descText="关注的用户" @barClick="$router.push('/follows')" />
-      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="handleBar('回复')" />
+      <NavBar LabelText="我的跟帖" descText="发布的所有回复" @barClick="$router.push('/mycomments')" />
       <NavBar LabelText="我的收藏" descText="文章/视频" @barClick="$router.push('/star')" />
       <NavBar LabelText="设置" descText @barClick="handleBar('设置')" />
     </div>
