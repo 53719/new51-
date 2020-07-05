@@ -17,7 +17,7 @@
         <span class="iconfont iconpinglun-"></span>
         <div class="num">520</div>
       </div>
-      <span class="iconfont iconshoucang"></span>
+      <span class="iconfont iconshoucang" @click="addStar()"></span>
       <span class="iconfont iconfenxiang"></span>
     </div>
   </div>
@@ -78,6 +78,15 @@ export default {
           this.$emit("reloadComment");
           this.content = "";
         }
+      });
+    },
+    addStar(id) {
+      // console.log(this.$route.params.id);
+      this.$axios({
+        url: "/post_star/" + this.$route.params.id,
+        method: "get"
+      }).then(res => {
+        console.log(res.data);
       });
     }
   }
