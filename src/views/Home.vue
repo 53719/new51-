@@ -42,7 +42,7 @@ export default {
       // 是否在加载
       loading: false,
       // 是否已经全部加载
-      finished: false,
+      finished: false
       // sticky: true
     };
   },
@@ -74,33 +74,56 @@ export default {
 
   methods: {
     getCategories() {
-      this.$axios({
-        url: "/category"
-      }).then(res => {
-        console.log(res.data);
-        // this.categoriesList = res.data.data
-        // 只有获取完了栏目数据, 才可以开始获取文章数据
-        // 获取文章需要发送一个 ajax 请求, 建议另外封装函数
+      // 现在已经有本地储存的栏目数据, 应该直接拿来用
+      // 之前我们 ajax 获取的, 无非是一个 res.data.data 就是栏目数据
+      const enable = localStorage.getItem("enable");
+      if (enable) {
+        const res = {
+          data: {
+            data: JSON.parse(enable)
+          }
+        };
+        console.log(res.data.data);
+
+        // 之后可以使用 res.data.data 来使用这些栏目
+        // 跟原来的逻辑能够无缝对接
         const newData = res.data.data.map(category => {
           return {
             ...category,
             postList: [],
             pageIndex: 1,
-            //每页长度
             pageSize: 5,
-            // 是否在加载
             loading: false,
-            // 是否已经全部加载
-            finished: false,
-            // sticky: true
+            finished: false
           };
         });
         this.categoriesList = newData;
         console.log(this.categoriesList);
 
         this.getPost();
-      });
+      } else {
+        this.$axios({
+          url: "/category"
+        }).then(res => {
+          console.log(res.data);
+          const newData = res.data.data.map(category => {
+            return {
+              ...category,
+              postList: [],
+              pageIndex: 1,
+              pageSize: 5,
+              loading: false,
+              finished: false
+            };
+          });
+          this.categoriesList = newData;
+          console.log(this.categoriesList);
+
+          this.getPost();
+        });
+      }
     },
+
     loadMorePost() {
       // 读取更多文章, 实际上
       // 就是将当前栏目的 pageIndex 加一
